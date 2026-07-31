@@ -15,7 +15,7 @@ const categories = [
     code: "Img",
     name: "Immagini",
     desc: "Comprimi, converti e ridimensiona in un tocco.",
-    href: "#",
+    href: "/strumenti/immagini",
   },
   {
     code: "Utl",
