@@ -29,7 +29,7 @@ export default function UtilityHub() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {tools.map((tool) => (
             
-              key={tool.name}
+            <a key={tool.name}
               href={tool.href}
               className="block border border-[var(--border-subtle)] rounded-lg p-6 bg-[var(--bg-surface)] hover:border-[var(--accent-brass)] transition"
             >
