@@ -9,7 +9,7 @@ const categories = [
     code: "PDF",
     name: "PDF",
     desc: "Comprimi, unisci, dividi e converti i tuoi documenti.",
-    href: "#",
+    href: "/strumenti/pdf",
   },
   {
     code: "Img",
