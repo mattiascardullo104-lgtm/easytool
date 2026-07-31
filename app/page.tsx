@@ -3,26 +3,31 @@ const categories = [
     code: "Aa",
     name: "Testo",
     desc: "Conta parole, riscrivi, correggi, genera titoli.",
+    href: "/strumenti/word-counter",
   },
   {
     code: "PDF",
     name: "PDF",
     desc: "Comprimi, unisci, dividi e converti i tuoi documenti.",
+    href: "#",
   },
   {
     code: "Img",
     name: "Immagini",
     desc: "Comprimi, converti e ridimensiona in un tocco.",
+    href: "#",
   },
   {
     code: "Utl",
     name: "Utility",
     desc: "QR code, password sicure, conversioni, generatori.",
+    href: "#",
   },
   {
     code: "AI",
     name: "AI Arena",
     desc: "Scopri e confronta le migliori intelligenze artificiali.",
+    href: "#",
   },
 ];
 
@@ -57,7 +62,11 @@ export default function Home() {
       <section id="categorie" className="px-6 pb-24 max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {categories.map((cat) => (
-            <div key={cat.name} className="border border-[var(--border-subtle)] rounded-lg p-6 bg-[var(--bg-surface)] hover:border-[var(--accent-brass)] transition">
+            
+              <a key={cat.name}
+              href={cat.href}
+              className="block border border-[var(--border-subtle)] rounded-lg p-6 bg-[var(--bg-surface)] hover:border-[var(--accent-brass)] transition"
+            >
               <span className="font-tool text-xs text-[var(--accent-steel)] block mb-3">
                 {cat.code}
               </span>
@@ -65,7 +74,7 @@ export default function Home() {
                 {cat.name}
               </h2>
               <p className="text-sm text-[var(--text-muted)]">{cat.desc}</p>
-            </div>
+            </a>
           ))}
         </div>
       </section>
