@@ -5,6 +5,11 @@ const tools = [
     href: "/strumenti/password-generator",
   },
   {
+    name: "Password Manager",
+    desc: "Salva le tue password in un vault cifrato nel browser.",
+    href: "/strumenti/password-manager",
+  },
+  {
     name: "QR Code Generator",
     desc: "Trasforma un link o un testo in un codice QR scaricabile.",
     href: "/strumenti/qr-code-generator",
