@@ -3,7 +3,7 @@ const categories = [
     code: "Aa",
     name: "Testo",
     desc: "Conta parole, riscrivi, correggi, genera titoli.",
-    href: "/strumenti/word-counter",
+    href: "/strumenti/testo",
   },
   {
     code: "PDF",

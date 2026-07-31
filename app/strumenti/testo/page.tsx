@@ -1,32 +1,22 @@
 const tools = [
   {
-    name: "Password Generator",
-    desc: "Crea password sicure e casuali, con controllo su lunghezza e simboli.",
-    href: "/strumenti/password-generator",
+    name: "Word Counter",
+    desc: "Conta parole, caratteri e tempo di lettura in tempo reale.",
+    href: "/strumenti/word-counter",
   },
   {
-    name: "Password Manager",
-    desc: "Salva le tue password in un vault cifrato nel browser.",
-    href: "/strumenti/password-manager",
+    name: "Text Case Converter",
+    desc: "Converti il testo in maiuscolo, minuscolo, titolo e altro.",
+    href: "/strumenti/text-case-converter",
   },
   {
-    name: "QR Code Generator",
-    desc: "Trasforma un link o un testo in un codice QR scaricabile.",
-    href: "/strumenti/qr-code-generator",
-  },
-  {
-    name: "Unit Converter",
-    desc: "Converti lunghezze, pesi e temperature tra le unità più comuni.",
-    href: "/strumenti/unit-converter",
-  },
-  {
-    name: "Random Generator",
-    desc: "Numeri casuali, lancio della moneta e del dado.",
-    href: "/strumenti/random-generator",
+    name: "AI Summarizer",
+    desc: "Riassumi articoli e testi lunghi con l'intelligenza artificiale.",
+    href: "/strumenti/ai-summarizer",
   },
 ];
 
-export default function UtilityHub() {
+export default function TestoHub() {
   return (
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
@@ -38,12 +28,11 @@ export default function UtilityHub() {
           CATEGORIA
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
-          Utility
+          Testo
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {tools.map((tool) => (
-            
             <a key={tool.name}
               href={tool.href}
               className="block border border-[var(--border-subtle)] rounded-lg p-6 bg-[var(--bg-surface)] hover:border-[var(--accent-brass)] transition"

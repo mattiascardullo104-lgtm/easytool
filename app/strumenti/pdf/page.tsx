@@ -9,6 +9,11 @@ const tools = [
     desc: "Estrai un intervallo di pagine da un PDF.",
     href: "/strumenti/pdf-splitter",
   },
+  {
+    name: "PDF Compressor",
+    desc: "Riduci il peso dei tuoi PDF, direttamente nel browser.",
+    href: "/strumenti/pdf-compressor",
+  },
 ];
 
 export default function PDFHub() {
