@@ -24,6 +24,31 @@ const tools = [
     desc: "Numeri casuali, lancio della moneta e del dado.",
     href: "/strumenti/random-generator",
   },
+  {
+    name: "Base64 Encoder/Decoder",
+    desc: "Codifica e decodifica testo in Base64.",
+    href: "/strumenti/base64-converter",
+  },
+  {
+    name: "URL Encoder/Decoder",
+    desc: "Codifica e decodifica URL e testo con caratteri speciali.",
+    href: "/strumenti/url-encoder",
+  },
+  {
+    name: "Color Converter",
+    desc: "Converti colori tra HEX, RGB e HSL con anteprima.",
+    href: "/strumenti/color-converter",
+  },
+  {
+    name: "UUID Generator",
+    desc: "Genera UUID v4, uno o più alla volta.",
+    href: "/strumenti/uuid-generator",
+  },
+  {
+    name: "Timer",
+    desc: "Cronometro e conto alla rovescia con avviso sonoro.",
+    href: "/strumenti/timer",
+  },
 ];
 
 export default function UtilityHub() {

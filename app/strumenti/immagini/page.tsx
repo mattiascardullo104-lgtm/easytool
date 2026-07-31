@@ -4,6 +4,26 @@ const tools = [
     desc: "Comprimi e ridimensiona le tue immagini direttamente nel browser.",
     href: "/strumenti/image-compressor",
   },
+  {
+    name: "Image Converter",
+    desc: "Converti immagini in PNG, JPG o WEBP direttamente nel browser.",
+    href: "/strumenti/image-converter",
+  },
+  {
+    name: "Image Resizer",
+    desc: "Ridimensiona le immagini in percentuale o in pixel.",
+    href: "/strumenti/image-resizer",
+  },
+  {
+    name: "OCR Text Extractor",
+    desc: "Estrai il testo scritto nelle immagini con il riconoscimento ottico.",
+    href: "/strumenti/ocr-extractor",
+  },
+  {
+    name: "Image Filters",
+    desc: "Applica filtri come bianco e nero, seppia, negativo o sfocatura.",
+    href: "/strumenti/image-filters",
+  },
 ];
 
 export default function ImmaginiHub() {

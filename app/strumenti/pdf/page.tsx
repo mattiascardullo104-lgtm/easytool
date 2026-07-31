@@ -14,6 +14,26 @@ const tools = [
     desc: "Riduci il peso dei tuoi PDF, direttamente nel browser.",
     href: "/strumenti/pdf-compressor",
   },
+  {
+    name: "PDF Editor",
+    desc: "Modifica metadati, aggiungi testo e ruota le pagine.",
+    href: "/strumenti/pdf-editor",
+  },
+  {
+    name: "Immagini → PDF",
+    desc: "Unisci le tue immagini in un unico file PDF.",
+    href: "/strumenti/images-to-pdf",
+  },
+  {
+    name: "PDF → Immagini",
+    desc: "Converti ogni pagina del PDF in un'immagine PNG.",
+    href: "/strumenti/pdf-to-images",
+  },
+  {
+    name: "PDF Rotator",
+    desc: "Ruota tutte le pagine del PDF di 90°, 180° o 270°.",
+    href: "/strumenti/pdf-rotator",
+  },
 ];
 
 export default function PDFHub() {

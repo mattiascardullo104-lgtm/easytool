@@ -14,6 +14,21 @@ const tools = [
     desc: "Riassumi articoli e testi lunghi con l'intelligenza artificiale.",
     href: "/strumenti/ai-summarizer",
   },
+  {
+    name: "Lorem Ipsum Generator",
+    desc: "Genera testo segnaposto in parole, frasi o paragrafi.",
+    href: "/strumenti/lorem-ipsum",
+  },
+  {
+    name: "Remove Duplicate Lines",
+    desc: "Elimina le righe duplicate da un testo incollato.",
+    href: "/strumenti/remove-duplicates",
+  },
+  {
+    name: "Slug Generator",
+    desc: "Trasforma un titolo in uno slug adatto agli URL.",
+    href: "/strumenti/slug-generator",
+  },
 ];
 
 export default function TestoHub() {
