@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -54,7 +54,7 @@ export default function Header() {
             </Link>
           )}
           <a
-            href={SITE.koFi}
+            href={SITE.paypalDonate}
             target="_blank"
             rel="noopener noreferrer"
             className="ml-3 border border-[var(--border-subtle)] text-[var(--text-muted)] font-medium text-sm px-4 py-2 rounded-md hover:border-[var(--accent-brass)] hover:text-[var(--text-primary)] transition"
@@ -100,7 +100,7 @@ export default function Header() {
             </Link>
           )}
           <a
-            href={SITE.koFi}
+            href={SITE.paypalDonate}
             target="_blank"
             rel="noopener noreferrer"
             className="text-center font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] transition"

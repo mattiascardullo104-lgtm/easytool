@@ -34,6 +34,16 @@ const tools = [
     desc: "Rotate all PDF pages by 90°, 180° or 270°.",
     href: "/strumenti/pdf-rotator",
   },
+  {
+    name: "Add Page Numbers",
+    desc: "Add page numbers to your PDF in any position.",
+    href: "/strumenti/pdf-page-numbers",
+  },
+  {
+    name: "Reverse PDF",
+    desc: "Reverse the order of all pages in a PDF.",
+    href: "/strumenti/pdf-reverse",
+  },
 ];
 
 export default function PDFHub() {

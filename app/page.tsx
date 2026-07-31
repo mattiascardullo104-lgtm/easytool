@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+﻿import dynamic from "next/dynamic";
 import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
 import InteractiveDemo from "@/components/InteractiveDemo";
@@ -86,7 +86,7 @@ export default function Home() {
               Explore the tools
             </a>
             <a
-              href={SITE.koFi}
+              href={SITE.paypalDonate}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-8 py-3.5 rounded-lg hover:border-[var(--accent-brass)] transition"
@@ -213,7 +213,7 @@ export default function Home() {
               every tool free forever.
             </p>
             <a
-              href={SITE.koFi}
+              href={SITE.paypalDonate}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block border border-[var(--accent-brass)] text-[var(--accent-brass)] font-medium px-8 py-3.5 rounded-lg hover:bg-[var(--accent-brass)] hover:text-[#15181C] transition"

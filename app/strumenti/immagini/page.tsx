@@ -24,6 +24,16 @@ const tools = [
     desc: "Apply filters like black and white, sepia, negative, or blur.",
     href: "/strumenti/image-filters",
   },
+  {
+    name: "Image Rotator",
+    desc: "Rotate or flip your images in one click.",
+    href: "/strumenti/image-rotator",
+  },
+  {
+    name: "Image to ASCII Art",
+    desc: "Turn any image into ASCII art text.",
+    href: "/strumenti/ascii-art",
+  },
 ];
 
 export default function ImmaginiHub() {

@@ -49,6 +49,26 @@ const tools = [
     desc: "Stopwatch and countdown with sound alert.",
     href: "/strumenti/timer",
   },
+  {
+    name: "Age Calculator",
+    desc: "Calculate your exact age and next birthday.",
+    href: "/strumenti/age-calculator",
+  },
+  {
+    name: "Percentage Calculator",
+    desc: "Percentages, proportions and percentage change.",
+    href: "/strumenti/percentage-calculator",
+  },
+  {
+    name: "Hash Generator",
+    desc: "Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes.",
+    href: "/strumenti/hash-generator",
+  },
+  {
+    name: "Base Converter",
+    desc: "Convert numbers between bases 2, 8, 10, 16 and more.",
+    href: "/strumenti/base-converter",
+  },
 ];
 
 export default function UtilityHub() {

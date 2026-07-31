@@ -29,6 +29,21 @@ const tools = [
     desc: "Turn a title into a URL-friendly slug.",
     href: "/strumenti/slug-generator",
   },
+  {
+    name: "Markdown to HTML",
+    desc: "Convert Markdown text into HTML code.",
+    href: "/strumenti/markdown-to-html",
+  },
+  {
+    name: "Text Diff",
+    desc: "Compare two texts and highlight the differences.",
+    href: "/strumenti/text-diff",
+  },
+  {
+    name: "Text to Speech",
+    desc: "Listen to any text read aloud, in your browser.",
+    href: "/strumenti/text-to-speech",
+  },
 ];
 
 export default function TestoHub() {
