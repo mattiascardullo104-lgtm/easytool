@@ -15,8 +15,7 @@ export default function PDFCompressor() {
   const loadPdfjs = async () => {
     if (pdfjsRef.current) return pdfjsRef.current;
     const pdfjsLib = await import("pdfjs-dist");
-    const version = (await import("pdfjs-dist/package.json")).version;
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@6.2.108/build/pdf.worker.min.mjs`;
     pdfjsRef.current = pdfjsLib;
     return pdfjsLib;
   };
