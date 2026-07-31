@@ -48,7 +48,7 @@ export default function Home() {
           EASYTOOLS · TOOLKIT DIGITALE
         </p>
         <h1 className="font-display text-4xl sm:text-5xl font-semibold text-[var(--text-primary)] leading-tight mb-5">
-          Il coltellino svizzero del web.
+          Tools online, 100% free.
         </h1>
         <p className="text-[var(--text-muted)] text-lg mb-8">
           Cinque categorie, strumenti essenziali, zero installazioni.
