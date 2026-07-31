@@ -21,7 +21,7 @@ const categories = [
     code: "Utl",
     name: "Utility",
     desc: "QR code, password sicure, conversioni, generatori.",
-    href: "/strumenti/password-generator",
+    href: "/strumenti/utility",
   },
   {
     code: "AI",
