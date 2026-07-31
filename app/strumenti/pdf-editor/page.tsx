@@ -35,7 +35,7 @@ export default function PDFEditor() {
       setAuthor(doc.getAuthor() ?? "");
       setTextPage(1);
     } catch {
-      setError("File non valido. Carica un PDF non protetto.");
+      setError("Invalid file. Please upload an unprotected PDF.");
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,7 @@ export default function PDFEditor() {
       });
       setText("");
     } catch {
-      setError("Impossibile aggiungere il testo.");
+      setError("Unable to add the text.");
     }
   };
 
@@ -93,7 +93,7 @@ export default function PDFEditor() {
       }
       setWatermark("");
     } catch {
-      setError("Impossibile aggiungere il watermark.");
+      setError("Unable to add the watermark.");
     }
   };
 
@@ -111,11 +111,11 @@ export default function PDFEditor() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = file ? file.name.replace(/\.pdf$/i, "") + "-modificato.pdf" : "modificato.pdf";
+      link.download = file ? file.name.replace(/\.pdf$/i, "") + "-edited.pdf" : "edited.pdf";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante il salvataggio.");
+      setError("Error while saving.");
     } finally {
       setLoading(false);
     }
@@ -125,11 +125,11 @@ export default function PDFEditor() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           PDF Editor
@@ -137,10 +137,10 @@ export default function PDFEditor() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un PDF"}
+            {file ? file.name : "Choose a PDF"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Modifica metadati, aggiungi testo, ruota pagine · tutto nel browser
+            Edit metadata, add text, rotate pages · everything stays in your browser
           </span>
           <input
             type="file"
@@ -152,38 +152,38 @@ export default function PDFEditor() {
 
         {loading && !file && (
           <p className="font-tool text-xs text-[var(--text-muted)] text-center mb-6">
-            Caricamento...
+            Loading...
           </p>
         )}
 
         {file && !loading && (
           <>
             <p className="font-tool text-xs text-[var(--text-muted)] mb-6">
-              Il PDF ha {pageCount} {pageCount === 1 ? "pagina" : "pagine"}
+              The PDF has {pageCount} {pageCount === 1 ? "page" : "pages"}
             </p>
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
               <p className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-                Metadati
+                Metadata
               </p>
               <div className="space-y-4">
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Titolo</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Title</label>
                   <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Titolo del documento"
+                    placeholder="Document title"
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Autore</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Author</label>
                   <input
                     type="text"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
-                    placeholder="Autore"
+                    placeholder="Author"
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
@@ -192,22 +192,22 @@ export default function PDFEditor() {
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
               <p className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-                Aggiungi testo
+                Add text
               </p>
               <div className="space-y-4">
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Testo</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Text</label>
                   <input
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Testo da aggiungere..."
+                    placeholder="Text to add..."
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Pagina</label>
+                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Page</label>
                     <input
                       type="number"
                       min={1}
@@ -218,7 +218,7 @@ export default function PDFEditor() {
                     />
                   </div>
                   <div>
-                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Dimensione</label>
+                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Size</label>
                     <input
                       type="number"
                       min={8}
@@ -229,7 +229,7 @@ export default function PDFEditor() {
                     />
                   </div>
                   <div>
-                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">X (da sinistra)</label>
+                    <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">X (from left)</label>
                     <input
                       type="number"
                       min={0}
@@ -244,45 +244,45 @@ export default function PDFEditor() {
                   disabled={!text.trim()}
                   className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition disabled:opacity-40"
                 >
-                  Aggiungi testo alla pagina
+                  Add text to the page
                 </button>
                 <p className="font-tool text-xs text-[var(--text-muted)]">
-                  Il testo viene aggiunto in cima alla pagina selezionata. Puoi ripeterlo più volte.
+                  The text is added at the top of the selected page. You can repeat this multiple times.
                 </p>
               </div>
             </div>
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
               <p className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-                Ruota pagina
+                Rotate page
               </p>
               <button
                 onClick={rotateRight}
                 className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition"
               >
-                Ruota di 90° la pagina {textPage}
+                Rotate page {textPage} by 90°
               </button>
             </div>
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
               <p className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-                Aggiungi watermark
+                Add watermark
               </p>
               <div className="space-y-4">
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Testo del watermark</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Watermark text</label>
                   <input
                     type="text"
                     value={watermark}
                     onChange={(e) => setWatermark(e.target.value)}
-                    placeholder="es. RISERVATO o il tuo nome"
+                    placeholder="e.g. CONFIDENTIAL or your name"
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-                      <span>Dimensione</span>
+                      <span>Size</span>
                       <span className="text-[var(--accent-brass)]">{watermarkSize}</span>
                     </label>
                     <input
@@ -296,7 +296,7 @@ export default function PDFEditor() {
                   </div>
                   <div>
                     <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-                      <span>Opacità</span>
+                      <span>Opacity</span>
                       <span className="text-[var(--accent-brass)]">{Math.round(watermarkOpacity * 100)}%</span>
                     </label>
                     <input
@@ -314,7 +314,7 @@ export default function PDFEditor() {
                   disabled={!watermark.trim()}
                   className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition disabled:opacity-40"
                 >
-                  Aggiungi watermark a tutte le pagine
+                  Add watermark to all pages
                 </button>
               </div>
             </div>
@@ -326,7 +326,7 @@ export default function PDFEditor() {
               disabled={loading}
               className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
             >
-              {loading ? "Salvataggio..." : "Salva e scarica PDF"}
+              {loading ? "Saving..." : "Save and download PDF"}
             </button>
           </>
         )}

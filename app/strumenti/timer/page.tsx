@@ -74,11 +74,11 @@ export default function TimerTool() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/utility" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Utility
+          ← Back to Utility
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Timer
@@ -87,8 +87,8 @@ export default function TimerTool() {
         <div className="grid grid-cols-2 gap-3 mb-6">
           {(
             [
-              { value: "stopwatch", label: "Cronometro" },
-              { value: "countdown", label: "Conto alla rovescia" },
+              { value: "stopwatch", label: "Stopwatch" },
+              { value: "countdown", label: "Countdown" },
             ] as { value: Mode; label: string }[]
           ).map((m) => (
             <button
@@ -108,7 +108,7 @@ export default function TimerTool() {
         {mode === "countdown" && (
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Minuti</label>
+              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Minutes</label>
               <input
                 type="number"
                 min={0}
@@ -123,7 +123,7 @@ export default function TimerTool() {
               />
             </div>
             <div>
-              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Secondi</label>
+              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Seconds</label>
               <input
                 type="number"
                 min={0}
@@ -142,7 +142,7 @@ export default function TimerTool() {
 
         {done && (
           <p className="font-tool text-xs text-[var(--accent-brass)] text-center mb-4">
-            Tempo scaduto!
+            Time&apos;s up!
           </p>
         )}
 
@@ -158,14 +158,14 @@ export default function TimerTool() {
             disabled={running}
             className="bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
           >
-            Avvia
+            Start
           </button>
           <button
             onClick={stop}
             disabled={!running}
             className="border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition disabled:opacity-40"
           >
-            Pausa
+            Pause
           </button>
           <button
             onClick={reset}

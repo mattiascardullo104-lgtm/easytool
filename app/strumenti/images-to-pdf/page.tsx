@@ -42,11 +42,11 @@ export default function ImagesToPDF() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "immagini.pdf";
+      link.download = "images.pdf";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante la conversione.");
+      setError("Error during conversion.");
     } finally {
       setLoading(false);
     }
@@ -69,22 +69,22 @@ export default function ImagesToPDF() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
-          Immagini → PDF
+          Images to PDF
         </h1>
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {files.length > 0 ? `${files.length} immagini selezionate` : "Scegli le immagini"}
+            {files.length > 0 ? `${files.length} images selected` : "Choose the images"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            PNG, JPG, WEBP e altre · una pagina per immagine · tutto nel browser
+            PNG, JPG, WEBP and more · one page per image · everything stays in your browser
           </span>
           <input
             type="file"
@@ -99,7 +99,7 @@ export default function ImagesToPDF() {
           <div className="grid grid-cols-3 gap-3 mb-6">
             {previews.map((p, i) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={i} src={p} alt={`Immagine ${i + 1}`} className="w-full h-24 object-cover rounded-lg border border-[var(--border-subtle)]" />
+              <img key={i} src={p} alt={`Image ${i + 1}`} className="w-full h-24 object-cover rounded-lg border border-[var(--border-subtle)]" />
             ))}
           </div>
         )}
@@ -111,7 +111,7 @@ export default function ImagesToPDF() {
           disabled={files.length === 0 || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Conversione in corso..." : "Converti in PDF"}
+          {loading ? "Converting..." : "Convert to PDF"}
         </button>
       </div>
     </main>

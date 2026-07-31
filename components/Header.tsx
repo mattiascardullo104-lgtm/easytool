@@ -3,17 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { usePremium } from "@/lib/usePremium";
 
 const links = [
   { href: "/strumenti/pdf", label: "PDF" },
-  { href: "/strumenti/immagini", label: "Immagini" },
-  { href: "/strumenti/testo", label: "Testo" },
+  { href: "/strumenti/immagini", label: "Images" },
+  { href: "/strumenti/testo", label: "Text" },
   { href: "/strumenti/utility", label: "Utility" },
   { href: "/strumenti/ai", label: "AI" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { premium, ready } = usePremium();
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0E1113]/80 border-b border-[var(--border-subtle)]">
@@ -26,6 +28,11 @@ export default function Header() {
           <span className="font-display text-lg font-semibold text-[var(--text-primary)]">
             Easy<span className="text-[var(--accent-brass)]">Tools</span>
           </span>
+          {ready && premium && (
+            <span className="ml-1 font-tool text-[10px] text-[#15181C] bg-[var(--accent-brass)] px-2 py-0.5 rounded">
+              PREMIUM
+            </span>
+          )}
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
@@ -38,13 +45,21 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
+          {ready && !premium && (
+            <Link
+              href="/premium"
+              className="ml-3 bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 hover:shadow-[0_0_24px_rgba(201,161,90,0.35)] transition"
+            >
+              Premium €1.99
+            </Link>
+          )}
           <a
             href={SITE.koFi}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 hover:shadow-[0_0_24px_rgba(201,161,90,0.35)] transition"
+            className="ml-3 border border-[var(--border-subtle)] text-[var(--text-muted)] font-medium text-sm px-4 py-2 rounded-md hover:border-[var(--accent-brass)] hover:text-[var(--text-primary)] transition"
           >
-            Offri un caffè ☕
+            ☕
           </a>
         </nav>
 
@@ -75,13 +90,22 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
+          {ready && !premium && (
+            <Link
+              href="/premium"
+              onClick={() => setOpen(false)}
+              className="mt-2 text-center bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 transition"
+            >
+              Premium €1.99
+            </Link>
+          )}
           <a
             href={SITE.koFi}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 text-center bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 transition"
+            className="text-center font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] transition"
           >
-            Offri un caffè ☕
+            ☕ Buy me a coffee
           </a>
         </nav>
       )}

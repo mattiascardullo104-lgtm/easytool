@@ -14,7 +14,7 @@ export default function AISummarizer() {
   const summarize = async () => {
     setError("");
     if (text.trim().length < 50) {
-      setError("Il testo è troppo corto. Incolla almeno 50 caratteri.");
+      setError("The text is too short. Paste at least 50 characters.");
       return;
     }
     setLoading(true);
@@ -28,13 +28,13 @@ export default function AISummarizer() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Errore durante il riassunto.");
+        setError(data.error || "Error while summarizing.");
       } else {
         setSummary(data.summary);
         if (data.keywords) setKeywords(data.keywords);
       }
     } catch {
-      setError("Impossibile contattare il servizio. Riprova.");
+      setError("Unable to reach the service. Try again.");
     } finally {
       setLoading(false);
     }
@@ -51,35 +51,35 @@ export default function AISummarizer() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/testo" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Testo
+          ← Back to Text
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · TESTO
+          TOOLS · TEXT
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           AI Summarizer
         </h1>
         <p className="text-sm text-[var(--text-muted)] mb-8">
-          Incolla un testo e l&apos;AI ne estrae un riassunto. Fino a 100 riassunti gratuiti al mese.
+          Paste a text and the AI will extract a summary from it. Up to 100 free summaries per month.
         </p>
 
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Incolla qui l'articolo o il testo da riassumere..."
+          placeholder="Paste the article or text to summarize here..."
           className="w-full h-48 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition resize-none mb-4"
         />
 
         <div className="mb-6">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Lunghezza del riassunto
+            Summary length
           </label>
           <div className="grid grid-cols-3 gap-3">
             {[
-              { value: "short", label: "Corto" },
-              { value: "medium", label: "Medio" },
-              { value: "long", label: "Lungo" },
+              { value: "short", label: "Short" },
+              { value: "medium", label: "Medium" },
+              { value: "long", label: "Long" },
             ].map((o) => (
               <button
                 key={o.value}
@@ -103,7 +103,7 @@ export default function AISummarizer() {
           disabled={loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Riassunto in corso..." : "Riassumi"}
+          {loading ? "Summarizing..." : "Summarize"}
         </button>
 
         {summary && !loading && (
@@ -114,7 +114,7 @@ export default function AISummarizer() {
               </p>
               {keywords && (
                 <div className="mt-4 pt-4 border-t border-[var(--border-subtle)]">
-                  <p className="font-tool text-xs text-[var(--accent-steel)] mb-2">PAROLE CHIAVE</p>
+                  <p className="font-tool text-xs text-[var(--accent-steel)] mb-2">KEYWORDS</p>
                   <p className="font-tool text-xs text-[var(--text-muted)]">{keywords}</p>
                 </div>
               )}
@@ -123,7 +123,7 @@ export default function AISummarizer() {
               onClick={copy}
               className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition"
             >
-              {copied ? "Copiato!" : "Copia riassunto"}
+              {copied ? "Copied!" : "Copy summary"}
             </button>
           </div>
         )}

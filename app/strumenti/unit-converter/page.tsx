@@ -4,45 +4,45 @@ import { useState } from "react";
 
 const categories = [
   {
-    name: "Lunghezza",
-    units: ["Metri", "Chilometri", "Centimetri", "Miglia", "Piedi", "Pollici"],
+    name: "Length",
+    units: ["Meters", "Kilometers", "Centimeters", "Miles", "Feet", "Inches"],
     toBase: (v: number, u: string) =>
-      u === "Metri" ? v
-      : u === "Chilometri" ? v * 1000
-      : u === "Centimetri" ? v / 100
-      : u === "Miglia" ? v * 1609.344
-      : u === "Piedi" ? v * 0.3048
-      : u === "Pollici" ? v * 0.0254
+      u === "Meters" ? v
+      : u === "Kilometers" ? v * 1000
+      : u === "Centimeters" ? v / 100
+      : u === "Miles" ? v * 1609.344
+      : u === "Feet" ? v * 0.3048
+      : u === "Inches" ? v * 0.0254
       : v,
     fromBase: (v: number, u: string) =>
-      u === "Metri" ? v
-      : u === "Chilometri" ? v / 1000
-      : u === "Centimetri" ? v * 100
-      : u === "Miglia" ? v / 1609.344
-      : u === "Piedi" ? v / 0.3048
-      : u === "Pollici" ? v / 0.0254
+      u === "Meters" ? v
+      : u === "Kilometers" ? v / 1000
+      : u === "Centimeters" ? v * 100
+      : u === "Miles" ? v / 1609.344
+      : u === "Feet" ? v / 0.3048
+      : u === "Inches" ? v / 0.0254
       : v,
   },
   {
-    name: "Peso",
-    units: ["Chilogrammi", "Grammi", "Libbre", "Once", "Tonnellate"],
+    name: "Weight",
+    units: ["Kilograms", "Grams", "Pounds", "Ounces", "Tonnes"],
     toBase: (v: number, u: string) =>
-      u === "Chilogrammi" ? v
-      : u === "Grammi" ? v / 1000
-      : u === "Libbre" ? v * 0.453592
-      : u === "Once" ? v * 0.0283495
-      : u === "Tonnellate" ? v * 1000
+      u === "Kilograms" ? v
+      : u === "Grams" ? v / 1000
+      : u === "Pounds" ? v * 0.453592
+      : u === "Ounces" ? v * 0.0283495
+      : u === "Tonnes" ? v * 1000
       : v,
     fromBase: (v: number, u: string) =>
-      u === "Chilogrammi" ? v
-      : u === "Grammi" ? v * 1000
-      : u === "Libbre" ? v / 0.453592
-      : u === "Once" ? v / 0.0283495
-      : u === "Tonnellate" ? v / 1000
+      u === "Kilograms" ? v
+      : u === "Grams" ? v * 1000
+      : u === "Pounds" ? v / 0.453592
+      : u === "Ounces" ? v / 0.0283495
+      : u === "Tonnes" ? v / 1000
       : v,
   },
   {
-    name: "Temperatura",
+    name: "Temperature",
     units: ["Celsius", "Fahrenheit", "Kelvin"],
     toBase: (v: number, u: string) =>
       u === "Celsius" ? v
@@ -77,11 +77,11 @@ export default function UnitConverter() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/utility" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Utility
+          ← Back to Utility
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Unit Converter
@@ -106,7 +106,7 @@ export default function UnitConverter() {
         <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
           <div className="space-y-4">
             <div>
-              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Valore</label>
+              <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Value</label>
               <input
                 type="number"
                 value={value}
@@ -116,7 +116,7 @@ export default function UnitConverter() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Da</label>
+                <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">From</label>
                 <select
                   value={from}
                   onChange={(e) => setFrom(e.target.value)}
@@ -128,7 +128,7 @@ export default function UnitConverter() {
                 </select>
               </div>
               <div>
-                <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">A</label>
+                <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">To</label>
                 <select
                   value={to}
                   onChange={(e) => setTo(e.target.value)}
@@ -144,9 +144,9 @@ export default function UnitConverter() {
         </div>
 
         <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-          <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Risultato</span>
+          <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Result</span>
           <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">
-            {isNaN(num) ? "—" : `${result.toLocaleString("it-IT")} ${to}`}
+            {isNaN(num) ? "—" : `${result.toLocaleString("en-US")} ${to}`}
           </span>
         </div>
       </div>

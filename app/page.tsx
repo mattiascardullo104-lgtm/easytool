@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
-import TutorialSection from "@/components/TutorialSection";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import { SITE } from "@/lib/site";
 
 const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
@@ -9,48 +9,48 @@ const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
 const categories = [
   {
     code: "Aa",
-    name: "Testo",
-    desc: "Conta parole, genera lorem ipsum, rimuovi duplicati.",
-    tools: "4 strumenti",
+    name: "Text",
+    desc: "Count words, generate lorem ipsum, remove duplicates.",
+    tools: "4 tools",
     href: "/strumenti/testo",
   },
   {
     code: "PDF",
     name: "PDF",
-    desc: "Comprimi, unisci, dividi, ruota e filigrana i documenti.",
-    tools: "6 strumenti",
+    desc: "Compress, merge, split, rotate and watermark your documents.",
+    tools: "6 tools",
     href: "/strumenti/pdf",
   },
   {
     code: "Img",
-    name: "Immagini",
-    desc: "Comprimi, converti, ridimensiona, OCR ed estrai testo.",
-    tools: "6 strumenti",
+    name: "Images",
+    desc: "Compress, convert, resize, OCR and extract text.",
+    tools: "6 tools",
     href: "/strumenti/immagini",
   },
   {
     code: "Utl",
     name: "Utility",
-    desc: "QR code, password, colori, UUID, timer e altro.",
-    tools: "9 strumenti",
+    desc: "QR codes, passwords, colors, UUIDs, timer and more.",
+    tools: "9 tools",
     href: "/strumenti/utility",
   },
   {
     code: "AI",
     name: "AI Arena",
-    desc: "Genera immagini e riassumi testi con l'intelligenza artificiale.",
-    tools: "2 strumenti",
+    desc: "Generate images and summarize text with artificial intelligence.",
+    tools: "2 tools",
     href: "/strumenti/ai",
   },
 ];
 
 const featured = [
-  { name: "PDF Compressor", desc: "Riduci il peso dei PDF fino al 90%.", href: "/strumenti/pdf-compressor" },
-  { name: "Image Compressor", desc: "Comprimi immagini senza perdita visibile.", href: "/strumenti/image-compressor" },
-  { name: "QR Code Generator", desc: "Link, testi e WiFi in un codice QR.", href: "/strumenti/qr-code-generator" },
-  { name: "Password Generator", desc: "Password sicure in un clic.", href: "/strumenti/password-generator" },
-  { name: "PDF Merger", desc: "Unisci più PDF in un unico file.", href: "/strumenti/pdf-merger" },
-  { name: "AI Image Generator", desc: "Immagini generate con l'AI, gratis.", href: "/strumenti/ai-image-generator" },
+  { name: "PDF Compressor", desc: "Reduce PDF size by up to 90%.", href: "/strumenti/pdf-compressor" },
+  { name: "Image Compressor", desc: "Compress images with no visible loss.", href: "/strumenti/image-compressor" },
+  { name: "QR Code Generator", desc: "Links, texts and WiFi in a QR code.", href: "/strumenti/qr-code-generator" },
+  { name: "Password Generator", desc: "Secure passwords in one click.", href: "/strumenti/password-generator" },
+  { name: "PDF Merger", desc: "Combine multiple PDFs into a single file.", href: "/strumenti/pdf-merger" },
+  { name: "AI Image Generator", desc: "Images generated with AI, for free.", href: "/strumenti/ai-image-generator" },
 ];
 
 export default function Home() {
@@ -65,25 +65,25 @@ export default function Home() {
 
         <div className="relative z-10 px-6 py-24 max-w-3xl mx-auto text-center">
           <p className="font-tool text-xs tracking-[0.3em] text-[var(--accent-brass)] mb-6 animate-fade-in">
-            {SITE.name.toUpperCase()} · TOOLKIT DIGITALE
+            {SITE.name.toUpperCase()} · DIGITAL TOOLKIT
           </p>
           <h1 className="font-display text-4xl sm:text-6xl font-bold text-[var(--text-primary)] leading-tight mb-6 animate-fade-in-up">
-            Strumenti online.
+            Online tools.
             <br />
             <span className="bg-gradient-to-r from-[var(--accent-brass)] to-[var(--accent-steel)] bg-clip-text text-transparent">
-              Gratis. Nel tuo browser.
+              Free. In your browser.
             </span>
           </h1>
           <p className="text-[var(--text-muted)] text-lg mb-10 max-w-xl mx-auto animate-fade-in-up">
-            Oltre 25 strumenti essenziali per PDF, immagini, testo e utility.
-            Zero installazioni, zero registrazioni, zero limiti.
+            25+ essential tools for PDF, images, text and utility.
+            No installs, no registration, no limits.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up">
             <a
               href="#categorie"
               className="w-full sm:w-auto bg-[var(--accent-brass)] text-[#15181C] font-medium px-8 py-3.5 rounded-lg hover:opacity-90 hover:shadow-[0_0_32px_rgba(201,161,90,0.4)] transition"
             >
-              Esplora gli strumenti
+              Explore the tools
             </a>
             <a
               href={SITE.koFi}
@@ -91,7 +91,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-8 py-3.5 rounded-lg hover:border-[var(--accent-brass)] transition"
             >
-              Offri un caffè ☕
+              Buy me a coffee ☕
             </a>
           </div>
         </div>
@@ -102,10 +102,10 @@ export default function Home() {
       <section id="categorie" className="px-6 py-20 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-3">
-            CATEGORIE
+            CATEGORIES
           </p>
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)]">
-            Tutto ciò che ti serve, organizzato
+            Everything you need, organized
           </h2>
         </div>
 
@@ -136,10 +136,10 @@ export default function Home() {
       <section className="px-6 pb-20 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-3">
-            PIÙ USATI
+            MOST USED
           </p>
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)]">
-            Strumenti in evidenza
+            Featured tools
           </h2>
         </div>
 
@@ -159,29 +159,66 @@ export default function Home() {
         </div>
       </section>
 
-      <TutorialSection />
+      <section className="px-6 py-20 max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-3">
+            TRY IT NOW
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-3">
+            Try some of the tools
+          </h2>
+          <p className="text-[var(--text-muted)] max-w-xl mx-auto">
+            No downloads, no waiting: the tools work right here, in real time.
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto">
+          <InteractiveDemo />
+        </div>
+      </section>
 
-      <section className="px-6 pb-24 max-w-3xl mx-auto text-center">
-        <div className="border border-[var(--border-subtle)] rounded-2xl p-10 bg-[var(--bg-surface)] relative overflow-hidden">
+      <section className="px-6 pb-24 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="border border-[var(--border-subtle)] rounded-2xl p-10 bg-[var(--bg-surface)] relative overflow-hidden text-center">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(92,138,196,0.08),transparent_60%)]" />
+          <div className="relative">
+            <p className="font-tool text-xs tracking-widest text-[var(--accent-steel)] mb-3">
+              EASYTOOLS PREMIUM
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-4">
+              No ads for €1.99/month
+            </h2>
+            <p className="text-[var(--text-muted)] mb-6 max-w-md mx-auto">
+              Remove every ad from the site and support development. Cancel
+              anytime.
+            </p>
+            <Link
+              href="/premium"
+              className="inline-block bg-[var(--accent-brass)] text-[#15181C] font-medium px-8 py-3.5 rounded-lg hover:opacity-90 hover:shadow-[0_0_32px_rgba(201,161,90,0.4)] transition"
+            >
+              Discover Premium
+            </Link>
+          </div>
+        </div>
+
+        <div className="border border-[var(--border-subtle)] rounded-2xl p-10 bg-[var(--bg-surface)] relative overflow-hidden text-center">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,161,90,0.08),transparent_60%)]" />
           <div className="relative">
             <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-3">
-              SOSTIENI EASYTOOLS
+              SUPPORT EASYTOOLS
             </p>
             <h2 className="font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-4">
-              Ti è stato utile? Offrici un caffè ☕
+              Did we help you? Buy us a coffee ☕
             </h2>
-            <p className="text-[var(--text-muted)] mb-6 max-w-lg mx-auto">
-              Ogni donazione copre costi di hosting e sviluppo e ci permette di
-              tenere tutti gli strumenti gratis per sempre.
+            <p className="text-[var(--text-muted)] mb-6 max-w-md mx-auto">
+              A one-time donation covers hosting and development costs and keeps
+              every tool free forever.
             </p>
             <a
               href={SITE.koFi}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[var(--accent-brass)] text-[#15181C] font-medium px-8 py-3.5 rounded-lg hover:opacity-90 hover:shadow-[0_0_32px_rgba(201,161,90,0.4)] transition"
+              className="inline-block border border-[var(--accent-brass)] text-[var(--accent-brass)] font-medium px-8 py-3.5 rounded-lg hover:bg-[var(--accent-brass)] hover:text-[#15181C] transition"
             >
-              Fai una donazione
+              Make a donation
             </a>
           </div>
         </div>

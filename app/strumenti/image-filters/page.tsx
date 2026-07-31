@@ -5,11 +5,11 @@ import { useRef, useState } from "react";
 type Filter = "grayscale" | "sepia" | "invert" | "contrast" | "blur";
 
 const filters: { value: Filter; label: string }[] = [
-  { value: "grayscale", label: "Bianco e nero" },
-  { value: "sepia", label: "Seppia" },
-  { value: "invert", label: "Negativo" },
-  { value: "contrast", label: "Contrasto" },
-  { value: "blur", label: "Sfocatura" },
+  { value: "grayscale", label: "Black & white" },
+  { value: "sepia", label: "Sepia" },
+  { value: "invert", label: "Negative" },
+  { value: "contrast", label: "Contrast" },
+  { value: "blur", label: "Blur" },
 ];
 
 export default function ImageFilters() {
@@ -50,11 +50,11 @@ export default function ImageFilters() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = file.name.replace(/\.[^.]+$/, "") + "-filtro.png";
+      link.download = file.name.replace(/\.[^.]+$/, "") + "-filter.png";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante l'applicazione del filtro.");
+      setError("Error while applying the filter.");
     } finally {
       setLoading(false);
     }
@@ -64,11 +64,11 @@ export default function ImageFilters() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/immagini" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Immagini
+          ← Back to Images
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · IMMAGINI
+          TOOLS · IMAGES
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Image Filters
@@ -76,10 +76,10 @@ export default function ImageFilters() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un'immagine"}
+            {file ? file.name : "Choose an image"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Applica filtri direttamente nel browser
+            Apply filters directly in your browser
           </span>
           <input
             type="file"
@@ -95,7 +95,7 @@ export default function ImageFilters() {
             <img
               ref={imageRef}
               src={preview}
-              alt="Anteprima"
+              alt="Preview"
               className="max-h-48 rounded-lg border border-[var(--border-subtle)]"
             />
           </div>
@@ -119,7 +119,7 @@ export default function ImageFilters() {
 
         <div className="mb-6">
           <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-            <span>Intensità</span>
+            <span>Intensity</span>
             <span className="text-[var(--accent-brass)]">{intensity}%</span>
           </label>
           <input
@@ -139,7 +139,7 @@ export default function ImageFilters() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Applicazione in corso..." : "Applica filtro e scarica"}
+          {loading ? "Applying..." : "Apply filter and download"}
         </button>
 
         <canvas ref={canvasRef} className="hidden" />

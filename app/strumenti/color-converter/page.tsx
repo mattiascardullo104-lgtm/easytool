@@ -42,11 +42,11 @@ export default function ColorConverter() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/utility" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Utility
+          ← Back to Utility
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Color Converter
@@ -72,7 +72,7 @@ export default function ColorConverter() {
           </div>
           <div>
             <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-              Selettore colore
+              Color picker
             </label>
             <input
               type="color"
@@ -87,7 +87,7 @@ export default function ColorConverter() {
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6">
             <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">RGB</p>
             <p className="font-mono text-sm text-[var(--text-primary)] break-all">
-              {rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : "HEX non valido"}
+              {rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : "Invalid HEX"}
             </p>
           </div>
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6">

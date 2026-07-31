@@ -5,35 +5,35 @@ export default function AffiliateDisclosure() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </Link>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          LEGALE
+          LEGAL
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
-          Trasparenza affiliati
+          Affiliate disclosure
         </h1>
 
         <div className="space-y-6 text-sm text-[var(--text-muted)] leading-relaxed">
           <p>
-            EasyTools è un sito gratuito. Per coprire i costi di gestione può
-            mostrare annunci pubblicitari e, in alcuni casi, link affiliati.
+            EasyTools is a free site. To cover its running costs it may display
+            advertisements and, in some cases, affiliate links.
           </p>
           <p>
-            Un <strong>link affiliato</strong> è un link che ci consente di
-            ricevere una commissione se acquisti un prodotto o servizio dopo aver
-            cliccato su di esso, <strong>senza alcun costo aggiuntivo per te</strong>.
+            An <strong>affiliate link</strong> is a link that allows us to earn
+            a commission if you buy a product or service after clicking on it,{" "}
+            <strong>at no extra cost to you</strong>.
           </p>
           <p>
-            Le raccomandazioni che pubblichiamo sono basate su valutazioni
-            indipendenti. La presenza di un link affiliato non modifica il prezzo
-            che paghi.
+            The recommendations we publish are based on independent reviews.
+            The presence of an affiliate link does not change the price you
+            pay.
           </p>
           <p>
-            La pubblicità che vedi è gestita da terze parti (es. Google AdSense),
-            che potrebbero mostrarti annunci in base alla tua attività di
-            navigazione. Puoi disattivare la personalizzazione degli annunci su{" "}
+            The ads you see are managed by third parties (e.g. Google AdSense),
+            which may show you ads based on your browsing activity. You can opt
+            out of ad personalization at{" "}
             <a
               href="https://adssettings.google.com"
               target="_blank"

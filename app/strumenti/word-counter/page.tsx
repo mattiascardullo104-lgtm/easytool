@@ -14,11 +14,11 @@ export default function WordCounter() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · TESTO
+          TOOLS · TEXT
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Word Counter
@@ -27,25 +27,25 @@ export default function WordCounter() {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Scrivi o incolla qui il tuo testo..."
+          placeholder="Type or paste your text here..."
           className="w-full h-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition resize-none"
         />
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
           <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Parole</span>
+            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Words</span>
             <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{words}</span>
           </div>
           <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Caratteri</span>
+            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Characters</span>
             <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{characters}</span>
           </div>
           <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Senza spazi</span>
+            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">No spaces</span>
             <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{charactersNoSpaces}</span>
           </div>
           <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Lettura</span>
+            <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Reading</span>
             <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{readingTime} min</span>
           </div>
         </div>

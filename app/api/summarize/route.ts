@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
   const apiKey = process.env.SUMMARIZE_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "Chiave API non configurata." },
+      { error: "API key not configured." },
       { status: 500 }
     );
   }
@@ -13,13 +13,13 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "JSON non valido." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
   }
 
   const text = body.text ?? "";
   if (text.length < 50) {
     return NextResponse.json(
-      { error: "Il testo è troppo corto (minimo 50 caratteri)." },
+      { error: "The text is too short (minimum 50 characters)." },
       { status: 400 }
     );
   }

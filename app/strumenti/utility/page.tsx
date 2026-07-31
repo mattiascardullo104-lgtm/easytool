@@ -1,52 +1,52 @@
 const tools = [
   {
     name: "Password Generator",
-    desc: "Crea password sicure e casuali, con controllo su lunghezza e simboli.",
+    desc: "Generate strong, random passwords with control over length and symbols.",
     href: "/strumenti/password-generator",
   },
   {
     name: "Password Manager",
-    desc: "Salva le tue password in un vault cifrato nel browser.",
+    desc: "Store your passwords in an encrypted vault in your browser.",
     href: "/strumenti/password-manager",
   },
   {
     name: "QR Code Generator",
-    desc: "Trasforma un link o un testo in un codice QR scaricabile.",
+    desc: "Turn a link or text into a downloadable QR code.",
     href: "/strumenti/qr-code-generator",
   },
   {
     name: "Unit Converter",
-    desc: "Converti lunghezze, pesi e temperature tra le unità più comuni.",
+    desc: "Convert lengths, weights and temperatures between the most common units.",
     href: "/strumenti/unit-converter",
   },
   {
     name: "Random Generator",
-    desc: "Numeri casuali, lancio della moneta e del dado.",
+    desc: "Random numbers, coin flips and dice rolls.",
     href: "/strumenti/random-generator",
   },
   {
     name: "Base64 Encoder/Decoder",
-    desc: "Codifica e decodifica testo in Base64.",
+    desc: "Encode and decode text to and from Base64.",
     href: "/strumenti/base64-converter",
   },
   {
     name: "URL Encoder/Decoder",
-    desc: "Codifica e decodifica URL e testo con caratteri speciali.",
+    desc: "Encode and decode URLs and text with special characters.",
     href: "/strumenti/url-encoder",
   },
   {
     name: "Color Converter",
-    desc: "Converti colori tra HEX, RGB e HSL con anteprima.",
+    desc: "Convert colors between HEX, RGB and HSL with live preview.",
     href: "/strumenti/color-converter",
   },
   {
     name: "UUID Generator",
-    desc: "Genera UUID v4, uno o più alla volta.",
+    desc: "Generate UUID v4, one or many at a time.",
     href: "/strumenti/uuid-generator",
   },
   {
     name: "Timer",
-    desc: "Cronometro e conto alla rovescia con avviso sonoro.",
+    desc: "Stopwatch and countdown with sound alert.",
     href: "/strumenti/timer",
   },
 ];
@@ -56,11 +56,11 @@ export default function UtilityHub() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          CATEGORIA
+          CATEGORY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
           Utility

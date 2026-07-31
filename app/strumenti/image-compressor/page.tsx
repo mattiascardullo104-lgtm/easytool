@@ -43,7 +43,7 @@ export default function ImageCompressor() {
     if (!compressed) return;
     const link = document.createElement("a");
     link.href = compressed.url;
-    link.download = "immagine-compressa.jpg";
+    link.download = "compressed-image.jpg";
     link.click();
   };
 
@@ -59,11 +59,11 @@ export default function ImageCompressor() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/immagini" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Immagini
+          ← Back to Images
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · IMMAGINI
+          TOOLS · IMAGES
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Image Compressor
@@ -71,10 +71,10 @@ export default function ImageCompressor() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {original ? original.name : "Scegli un'immagine"}
+            {original ? original.name : "Choose an image"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            {original ? formatBytes(original.size) : "PNG, JPG o WEBP · tutto nel browser"}
+            {original ? formatBytes(original.size) : "PNG, JPG, or WEBP · everything in your browser"}
           </span>
           <input
             type="file"
@@ -86,7 +86,7 @@ export default function ImageCompressor() {
 
         <div className="mb-6">
           <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-            <span>Qualità</span>
+            <span>Quality</span>
             <span className="text-[var(--accent-brass)]">{Math.round(quality * 100)}%</span>
           </label>
           <input
@@ -102,7 +102,7 @@ export default function ImageCompressor() {
 
         {loading && (
           <p className="font-tool text-xs text-[var(--text-muted)] text-center mb-6">
-            Compressione in corso...
+            Compressing...
           </p>
         )}
 
@@ -110,11 +110,11 @@ export default function ImageCompressor() {
           <>
             <div className="grid grid-cols-2 gap-5 mb-6">
               <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Prima</span>
+                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Before</span>
                 <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{formatBytes(original.size)}</span>
               </div>
               <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Dopo</span>
+                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">After</span>
                 <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{formatBytes(compressed.size)}</span>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function ImageCompressor() {
               onClick={download}
               className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
             >
-              Scarica immagine compressa
+              Download compressed image
             </button>
           </>
         )}

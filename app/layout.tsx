@@ -4,21 +4,21 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'EasyTools - Tool online gratuiti per PDF, Immagini, Testo e Utility',
+  title: 'EasyTools - Free online tools for PDF, Images, Text and Utility',
   description:
-    'Comprimi PDF, converti immagini, genera QR code e password sicure. Oltre 25 strumenti online gratuiti che funzionano direttamente nel browser, senza registrazione.',
+    'Compress PDFs, convert images, generate QR codes and secure passwords. 25+ free online tools that work directly in your browser, no registration needed.',
   keywords: [
-    'strumenti online gratuiti',
-    'comprimere pdf gratis',
-    'convertire immagini',
+    'free online tools',
+    'compress pdf free',
+    'image converter',
     'qr code generator',
     'password generator',
-    'tool pdf online',
+    'online pdf tools',
   ],
   openGraph: {
-    title: 'EasyTools - Tool online gratuiti',
+    title: 'EasyTools - Free online tools',
     description:
-      'Oltre 25 strumenti online gratuiti per PDF, immagini, testo e utility. Tutto nel browser.',
+      '25+ free online tools for PDF, images, text and utility. Everything in your browser.',
     type: 'website',
   },
 };
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it">
+    <html lang="en">
       <body>
         <Header />
         {children}

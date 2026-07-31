@@ -23,7 +23,7 @@ export default function PDFSplitter() {
       setStart(1);
       setEnd(count);
     } catch {
-      setError("File non valido. Carica un PDF.");
+      setError("Invalid file. Please upload a PDF.");
     }
   };
 
@@ -44,11 +44,11 @@ export default function PDFSplitter() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `pagine-${from}-${to}.pdf`;
+      link.download = `pages-${from}-${to}.pdf`;
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante l'estrazione delle pagine.");
+      setError("Error while extracting the pages.");
     } finally {
       setLoading(false);
     }
@@ -58,11 +58,11 @@ export default function PDFSplitter() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           PDF Splitter
@@ -70,10 +70,10 @@ export default function PDFSplitter() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un PDF"}
+            {file ? file.name : "Choose a PDF"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Estrai un intervallo di pagine · tutto nel browser
+            Extract a range of pages · everything stays in your browser
           </span>
           <input
             type="file"
@@ -86,13 +86,13 @@ export default function PDFSplitter() {
         {file && pageCount > 0 && (
           <>
             <p className="font-tool text-xs text-[var(--text-muted)] mb-4">
-              Il PDF ha {pageCount} {pageCount === 1 ? "pagina" : "pagine"}
+              The PDF has {pageCount} {pageCount === 1 ? "page" : "pages"}
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Dalla pagina
+                  From page
                 </label>
                 <input
                   type="number"
@@ -105,7 +105,7 @@ export default function PDFSplitter() {
               </div>
               <div>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Alla pagina
+                  To page
                 </label>
                 <input
                   type="number"
@@ -129,7 +129,7 @@ export default function PDFSplitter() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Estrazione in corso..." : "Estrai e scarica"}
+          {loading ? "Extracting..." : "Extract and download"}
         </button>
       </div>
     </main>

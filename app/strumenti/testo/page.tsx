@@ -1,32 +1,32 @@
 const tools = [
   {
     name: "Word Counter",
-    desc: "Conta parole, caratteri e tempo di lettura in tempo reale.",
+    desc: "Count words, characters and reading time in real time.",
     href: "/strumenti/word-counter",
   },
   {
     name: "Text Case Converter",
-    desc: "Converti il testo in maiuscolo, minuscolo, titolo e altro.",
+    desc: "Convert text to uppercase, lowercase, title case and more.",
     href: "/strumenti/text-case-converter",
   },
   {
     name: "AI Summarizer",
-    desc: "Riassumi articoli e testi lunghi con l'intelligenza artificiale.",
+    desc: "Summarize articles and long texts with artificial intelligence.",
     href: "/strumenti/ai-summarizer",
   },
   {
     name: "Lorem Ipsum Generator",
-    desc: "Genera testo segnaposto in parole, frasi o paragrafi.",
+    desc: "Generate placeholder text in words, sentences or paragraphs.",
     href: "/strumenti/lorem-ipsum",
   },
   {
     name: "Remove Duplicate Lines",
-    desc: "Elimina le righe duplicate da un testo incollato.",
+    desc: "Remove duplicate lines from pasted text.",
     href: "/strumenti/remove-duplicates",
   },
   {
     name: "Slug Generator",
-    desc: "Trasforma un titolo in uno slug adatto agli URL.",
+    desc: "Turn a title into a URL-friendly slug.",
     href: "/strumenti/slug-generator",
   },
 ];
@@ -36,14 +36,14 @@ export default function TestoHub() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          CATEGORIA
+          CATEGORY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
-          Testo
+          Text
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

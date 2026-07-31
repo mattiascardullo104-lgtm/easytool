@@ -91,11 +91,11 @@ export default function PasswordManager() {
   const createVault = async () => {
     setError("");
     if (masterPassword.length < 6) {
-      setError("La master password deve avere almeno 6 caratteri.");
+      setError("The master password must be at least 6 characters.");
       return;
     }
     if (masterPassword !== confirmPassword) {
-      setError("Le password non coincidono.");
+      setError("The passwords do not match.");
       return;
     }
     const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -130,7 +130,7 @@ export default function PasswordManager() {
       setUnlocked(true);
       setMasterPassword("");
     } catch {
-      setError("Master password errata.");
+      setError("Incorrect master password.");
     }
   };
 
@@ -146,7 +146,7 @@ export default function PasswordManager() {
     e.preventDefault();
     setError("");
     if (!site || !username || !password) {
-      setError("Compila sito, email e password.");
+      setError("Please fill in site, email and password.");
       return;
     }
     const next = [
@@ -199,7 +199,7 @@ export default function PasswordManager() {
     return (
       <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
         <div className="max-w-2xl mx-auto">
-          <p className="font-tool text-xs text-[var(--text-muted)]">Caricamento...</p>
+          <p className="font-tool text-xs text-[var(--text-muted)]">Loading...</p>
         </div>
       </main>
     );
@@ -209,17 +209,17 @@ export default function PasswordManager() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/utility" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Utility
+          ← Back to Utility
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Password Manager
         </h1>
         <p className="text-sm text-[var(--text-muted)] mb-8">
-          Le tue password restano cifrate nel browser, protette da una master password. Niente viene inviato online.
+          Your passwords stay encrypted in the browser, protected by a master password. Nothing is sent online.
         </p>
 
         {!unlocked ? (
@@ -227,7 +227,7 @@ export default function PasswordManager() {
             {hasVault ? (
               <>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Inserisci la master password
+                  Enter your master password
                 </label>
                 <input
                   type="password"
@@ -241,13 +241,13 @@ export default function PasswordManager() {
                   onClick={unlock}
                   className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
                 >
-                  Sblocca
+                  Unlock
                 </button>
               </>
             ) : (
               <>
                 <p className="font-display text-lg font-semibold text-[var(--text-primary)] mb-4">
-                  Crea il tuo vault
+                  Create your vault
                 </p>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
                   Master password
@@ -256,17 +256,17 @@ export default function PasswordManager() {
                   type="password"
                   value={masterPassword}
                   onChange={(e) => setMasterPassword(e.target.value)}
-                  placeholder="Minimo 6 caratteri"
+                  placeholder="At least 6 characters"
                   className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
                 />
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Conferma master password
+                  Confirm master password
                 </label>
                 <input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Ripetila"
+                  placeholder="Repeat it"
                   className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
                 />
                 {error && <p className="font-tool text-xs text-red-400 mb-4">{error}</p>}
@@ -274,7 +274,7 @@ export default function PasswordManager() {
                   onClick={createVault}
                   className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
                 >
-                  Crea vault
+                  Create vault
                 </button>
               </>
             )}
@@ -284,22 +284,22 @@ export default function PasswordManager() {
             <form onSubmit={addEntry} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-8">
               <div className="space-y-4">
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Sito o servizio</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Site or service</label>
                   <input
                     type="text"
                     value={site}
                     onChange={(e) => setSite(e.target.value)}
-                    placeholder="es. gmail.com"
+                    placeholder="e.g. gmail.com"
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
                 <div>
-                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Email o username</label>
+                  <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">Email or username</label>
                   <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="es. nome@email.com"
+                    placeholder="e.g. name@email.com"
                     className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition"
                   />
                 </div>
@@ -318,7 +318,7 @@ export default function PasswordManager() {
                       onClick={generatePassword}
                       className="border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-4 rounded-md hover:border-[var(--accent-steel)] transition shrink-0"
                     >
-                      Genera
+                      Generate
                     </button>
                   </div>
                 </div>
@@ -327,26 +327,26 @@ export default function PasswordManager() {
                   type="submit"
                   className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
                 >
-                  Salva password
+                  Save password
                 </button>
               </div>
             </form>
 
             <div className="flex items-center justify-between mb-4">
               <p className="font-tool text-xs text-[var(--text-muted)]">
-                {entries.length} {entries.length === 1 ? "password salvata" : "password salvate"}
+                {entries.length} {entries.length === 1 ? "password saved" : "passwords saved"}
               </p>
               <button
                 onClick={lock}
                 className="font-tool text-xs text-[var(--accent-steel)] hover:underline"
               >
-                Blocca
+                Lock
               </button>
             </div>
 
             {entries.length === 0 ? (
               <p className="text-sm text-[var(--text-muted)] text-center py-8 border border-dashed border-[var(--border-subtle)] rounded-lg">
-                Nessuna password salvata. Aggiungi la prima qui sopra.
+                No passwords saved yet. Add your first one above.
               </p>
             ) : (
               <div className="space-y-3">
@@ -359,19 +359,19 @@ export default function PasswordManager() {
                           onClick={() => toggleVisible(entry.id)}
                           className="font-tool text-xs text-[var(--accent-steel)] hover:underline"
                         >
-                          {visible.has(entry.id) ? "Nascondi" : "Mostra"}
+                          {visible.has(entry.id) ? "Hide" : "Show"}
                         </button>
                         <button
                           onClick={() => copyPassword(entry.id, entry.password)}
                           className="font-tool text-xs text-[var(--accent-steel)] hover:underline"
                         >
-                          {copiedId === entry.id ? "Copiata!" : "Copia"}
+                          {copiedId === entry.id ? "Copied!" : "Copy"}
                         </button>
                         <button
                           onClick={() => deleteEntry(entry.id)}
                           className="font-tool text-xs text-red-400 hover:underline"
                         >
-                          Elimina
+                          Delete
                         </button>
                       </div>
                     </div>

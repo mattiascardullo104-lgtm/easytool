@@ -10,8 +10,8 @@ export default function Footer() {
             Easy<span className="text-[var(--accent-brass)]">Tools</span>
           </p>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-            {SITE.tagline} Tutti gli strumenti funzionano direttamente nel
-            browser: nessun file viene caricato su server.
+            {SITE.tagline} All tools run directly in your browser: no file is
+            ever uploaded to a server.
           </p>
           <a
             href={SITE.koFi}
@@ -19,19 +19,25 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-block mt-4 border border-[var(--accent-brass)] text-[var(--accent-brass)] font-medium text-sm px-4 py-2 rounded-md hover:bg-[var(--accent-brass)] hover:text-[#15181C] transition"
           >
-            Sostieni il progetto ☕
+            Support the project ☕
           </a>
+          <Link
+            href="/premium"
+            className="inline-block mt-2 bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 transition"
+          >
+            Premium €1.99/month
+          </Link>
         </div>
 
         <div>
           <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-4">
-            CATEGORIE
+            CATEGORIES
           </p>
           <ul className="space-y-2">
             {[
               { href: "/strumenti/pdf", label: "PDF" },
-              { href: "/strumenti/immagini", label: "Immagini" },
-              { href: "/strumenti/testo", label: "Testo" },
+              { href: "/strumenti/immagini", label: "Images" },
+              { href: "/strumenti/testo", label: "Text" },
               { href: "/strumenti/utility", label: "Utility" },
               { href: "/strumenti/ai", label: "AI" },
             ].map((l) => (
@@ -46,7 +52,7 @@ export default function Footer() {
 
         <div>
           <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-4">
-            LEGALE
+            LEGAL
           </p>
           <ul className="space-y-2">
             <li>
@@ -61,7 +67,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/affiliate-disclosure" className="text-sm text-[var(--text-muted)] hover:text-[var(--accent-steel)] transition">
-                Trasparenza affiliati
+                Affiliate disclosure
               </Link>
             </li>
             <li>
@@ -75,7 +81,7 @@ export default function Footer() {
 
       <div className="border-t border-[var(--border-subtle)] py-5">
         <p className="font-tool text-xs text-[var(--text-muted)] text-center">
-          EASYTOOLS · TUTTI GLI STRUMENTI SONO GRATUITI
+          EASYTOOLS · ALL TOOLS ARE FREE
         </p>
       </div>
     </footer>

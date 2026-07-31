@@ -49,7 +49,7 @@ export default function ImageConverter() {
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante la conversione.");
+      setError("Error during conversion.");
     } finally {
       setLoading(false);
     }
@@ -59,11 +59,11 @@ export default function ImageConverter() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/immagini" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Immagini
+          ← Back to Images
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · IMMAGINI
+          TOOLS · IMAGES
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Image Converter
@@ -71,10 +71,10 @@ export default function ImageConverter() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un'immagine"}
+            {file ? file.name : "Choose an image"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Converti in PNG, JPG o WEBP · tutto nel browser
+            Convert to PNG, JPG, or WEBP · everything in your browser
           </span>
           <input
             type="file"
@@ -90,7 +90,7 @@ export default function ImageConverter() {
             <img
               ref={imageRef}
               src={preview}
-              alt="Anteprima"
+              alt="Preview"
               className="max-h-48 rounded-lg border border-[var(--border-subtle)]"
             />
           </div>
@@ -98,7 +98,7 @@ export default function ImageConverter() {
 
         <div className="mb-6">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Formato di destinazione
+            Target format
           </label>
           <div className="grid grid-cols-3 gap-3">
             {formats.map((f) => (
@@ -120,7 +120,7 @@ export default function ImageConverter() {
         {format !== "image/png" && (
           <div className="mb-6">
             <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-              <span>Qualità</span>
+              <span>Quality</span>
               <span className="text-[var(--accent-brass)]">{Math.round(quality * 100)}%</span>
             </label>
             <input
@@ -142,7 +142,7 @@ export default function ImageConverter() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Conversione in corso..." : "Converti e scarica"}
+          {loading ? "Converting..." : "Convert and download"}
         </button>
       </div>
     </main>

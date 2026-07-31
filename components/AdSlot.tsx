@@ -1,10 +1,17 @@
+"use client";
+
 import { SITE } from "@/lib/site";
+import { usePremium } from "@/lib/usePremium";
 
 export default function AdSlot({ className = "" }: { className?: string }) {
+  const { premium, ready } = usePremium();
+
+  if (!ready || premium) return null;
+
   return (
     <div className={`w-full ${className}`}>
       <p className="font-tool text-[10px] tracking-widest text-[var(--text-muted)] text-center mb-2">
-        PUBBLICITÀ
+        ADVERTISEMENT
       </p>
       {SITE.adsenseClient ? (
         // Appena imposti adsenseClient in lib/site.ts, qui viene mostrato l'annuncio.
@@ -22,7 +29,7 @@ export default function AdSlot({ className = "" }: { className?: string }) {
             <path d="M12 3l10 18H2L12 3z" />
           </svg>
           <span className="font-tool text-[11px] text-[var(--text-muted)]">
-            Spazio pubblicitario
+            Ad space
           </span>
         </div>
       )}

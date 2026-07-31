@@ -6,11 +6,11 @@ export default function CookiePolicy() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </Link>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          LEGALE
+          LEGAL
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
           Cookie Policy
@@ -19,32 +19,33 @@ export default function CookiePolicy() {
         <div className="space-y-8 text-sm text-[var(--text-muted)] leading-relaxed">
           <section>
             <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-3">
-              1. Cosa sono i cookie
+              1. What cookies are
             </h2>
             <p>
-              I cookie sono piccoli file di testo salvati dal tuo browser durante
-              la navigazione. Servono a far funzionare il sito e a raccogliere
-              informazioni statistiche o pubblicitarie.
+              Cookies are small text files stored by your browser while you
+              browse. They make the site work and collect statistical or
+              advertising information.
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-3">
-              2. Cookie utilizzati da {SITE.name}
+              2. Cookies used by {SITE.name}
             </h2>
             <ul className="list-disc list-inside mt-2 space-y-1">
               <li>
-                <strong>Cookie tecnici</strong>: indispensabili per il funzionamento
-                del sito (es. salvataggio locale delle preferenze degli strumenti).
+                <strong>Technical cookies</strong>: essential for the site to
+                work (e.g. local storage of tool preferences and the Premium
+                status).
               </li>
               <li>
-                <strong>Cookie di analisi</strong>: statistiche aggregate sulle
-                visite.
+                <strong>Analytics cookies</strong>: aggregated visit
+                statistics.
               </li>
               <li>
-                <strong>Cookie pubblicitari</strong>: se il sito mostra annunci
-                Google AdSense, Google e i suoi partner possono utilizzare cookie
-                per mostrare annunci pertinenti. Puoi gestire queste preferenze su{" "}
+                <strong>Advertising cookies</strong>: if the site displays
+                Google AdSense ads, Google and its partners may use cookies to
+                show relevant ads. You can manage these preferences at{" "}
                 <a
                   href="https://adssettings.google.com"
                   target="_blank"
@@ -60,21 +61,21 @@ export default function CookiePolicy() {
 
           <section>
             <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-3">
-              3. Come gestire i cookie
+              3. How to manage cookies
             </h2>
             <p>
-              Puoi disabilitare o eliminare i cookie dalle impostazioni del tuo
-              browser (Chrome, Firefox, Safari, Edge, ecc.). La disattivazione dei
-              cookie tecnici può compromettere alcune funzionalità del sito.
+              You can disable or delete cookies from your browser settings
+              (Chrome, Firefox, Safari, Edge, etc.). Disabling technical
+              cookies may affect some site features.
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-3">
-              4. Contatti
+              4. Contact
             </h2>
             <p>
-              Per qualsiasi domanda sui cookie puoi scrivere a {SITE.email}.
+              For any question about cookies, write to {SITE.email}.
             </p>
           </section>
         </div>

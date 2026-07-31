@@ -20,7 +20,7 @@ export default function PDFRotator() {
       setFile(f);
       setPageCount(doc.getPageCount());
     } catch {
-      setError("File non valido. Carica un PDF non protetto.");
+      setError("Invalid file. Please upload an unprotected PDF.");
     } finally {
       setLoading(false);
     }
@@ -43,11 +43,11 @@ export default function PDFRotator() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = file.name.replace(/\.pdf$/i, "") + "-ruotato.pdf";
+      link.download = file.name.replace(/\.pdf$/i, "") + "-rotated.pdf";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante la rotazione.");
+      setError("Error during rotation.");
     } finally {
       setLoading(false);
     }
@@ -57,11 +57,11 @@ export default function PDFRotator() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           PDF Rotator
@@ -69,10 +69,10 @@ export default function PDFRotator() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un PDF"}
+            {file ? file.name : "Choose a PDF"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Ruota tutte le pagine · tutto nel browser
+            Rotate all pages · everything stays in your browser
           </span>
           <input
             type="file"
@@ -84,13 +84,13 @@ export default function PDFRotator() {
 
         {file && pageCount > 0 && (
           <p className="font-tool text-xs text-[var(--text-muted)] mb-6">
-            Il PDF ha {pageCount} {pageCount === 1 ? "pagina" : "pagine"}
+            The PDF has {pageCount} {pageCount === 1 ? "page" : "pages"}
           </p>
         )}
 
         <div className="mb-6">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Angolo di rotazione
+            Rotation angle
           </label>
           <div className="grid grid-cols-3 gap-3">
             {[90, 180, 270].map((a) => (
@@ -116,7 +116,7 @@ export default function PDFRotator() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Rotazione in corso..." : "Ruota e scarica"}
+          {loading ? "Rotating..." : "Rotate and download"}
         </button>
       </div>
     </main>

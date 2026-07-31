@@ -73,10 +73,10 @@ export default function PDFCompressor() {
         url,
       });
       if (reduction <= 0) {
-        setError("Nessuna riduzione ottenuta: il PDF è già ottimizzato o ha poco testo/immagini.");
+        setError("No reduction achieved: the PDF is already optimized or has little text/images.");
       }
     } catch {
-      setError("Errore durante la compressione. Il PDF potrebbe essere protetto o corrotto.");
+      setError("Error during compression. The PDF may be protected or corrupted.");
     } finally {
       setLoading(false);
     }
@@ -86,7 +86,7 @@ export default function PDFCompressor() {
     if (!result) return;
     const link = document.createElement("a");
     link.href = result.url;
-    link.download = "compresso.pdf";
+    link.download = "compressed.pdf";
     link.click();
   };
 
@@ -102,11 +102,11 @@ export default function PDFCompressor() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           PDF Compressor
@@ -114,10 +114,10 @@ export default function PDFCompressor() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un PDF"}
+            {file ? file.name : "Choose a PDF"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Tutto nel browser · i file non vengono caricati online
+            Everything stays in your browser · files are never uploaded online
           </span>
           <input
             type="file"
@@ -129,7 +129,7 @@ export default function PDFCompressor() {
 
         <div className="mb-6">
           <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-            <span>Qualità</span>
+            <span>Quality</span>
             <span className="text-[var(--accent-brass)]">{Math.round(quality * 100)}%</span>
           </label>
           <input
@@ -150,22 +150,22 @@ export default function PDFCompressor() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Compressione in corso..." : "Comprimi PDF"}
+          {loading ? "Compressing..." : "Compress PDF"}
         </button>
 
         <p className="font-tool text-xs text-[var(--text-muted)] mt-4">
-          Nota: con questo metodo le pagine vengono convertite in immagini, quindi il testo non sarà più selezionabile. Ideale per PDF con molte immagini.
+          Note: with this method the pages are converted to images, so the text will no longer be selectable. Ideal for PDFs with many images.
         </p>
 
         {result && !loading && (
           <>
             <div className="grid grid-cols-2 gap-5 mt-6 mb-6">
               <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Prima</span>
+                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Before</span>
                 <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{formatBytes(result.before)}</span>
               </div>
               <div className="border border-[var(--border-subtle)] rounded-lg p-4 bg-[var(--bg-surface)]">
-                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">Dopo</span>
+                <span className="font-tool text-xs text-[var(--accent-steel)] block mb-1">After</span>
                 <span className="font-display text-2xl font-semibold text-[var(--text-primary)]">{formatBytes(result.after)}</span>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default function PDFCompressor() {
               onClick={download}
               className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition"
             >
-              Scarica PDF compresso
+              Download compressed PDF
             </button>
           </>
         )}

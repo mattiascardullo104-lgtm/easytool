@@ -31,11 +31,11 @@ export default function PDFMerger() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "unito.pdf";
+      link.download = "merged.pdf";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante l'unione. Controlla che i file siano PDF validi.");
+      setError("Error during the merge. Make sure the files are valid PDFs.");
     } finally {
       setLoading(false);
     }
@@ -45,11 +45,11 @@ export default function PDFMerger() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           PDF Merger
@@ -57,10 +57,10 @@ export default function PDFMerger() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {files.length > 0 ? `${files.length} file selezionati` : "Scegli i PDF da unire"}
+            {files.length > 0 ? `${files.length} files selected` : "Choose the PDFs to merge"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Seleziona almeno 2 PDF · tutto nel browser
+            Select at least 2 PDFs · everything stays in your browser
           </span>
           <input
             type="file"
@@ -93,7 +93,7 @@ export default function PDFMerger() {
           disabled={files.length < 2 || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Unione in corso..." : "Unisci e scarica"}
+          {loading ? "Merging..." : "Merge and download"}
         </button>
       </div>
     </main>

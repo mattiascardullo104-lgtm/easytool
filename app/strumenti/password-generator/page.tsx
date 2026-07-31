@@ -40,11 +40,11 @@ export default function PasswordGenerator() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Password Generator
@@ -52,13 +52,13 @@ export default function PasswordGenerator() {
 
         <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6">
           <div className="font-tool text-sm text-[var(--text-primary)] break-all min-h-[1.5rem]">
-            {password || "Premi Genera per creare una password"}
+            {password || "Press Generate to create a password"}
           </div>
         </div>
 
         <div className="mb-6">
           <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-            <span>Lunghezza</span>
+            <span>Length</span>
             <span className="text-[var(--accent-brass)]">{length}</span>
           </label>
           <input
@@ -79,7 +79,7 @@ export default function PasswordGenerator() {
               onChange={(e) => setIncludeUppercase(e.target.checked)}
               className="accent-[var(--accent-brass)]"
             />
-            Includi maiuscole (A-Z)
+            Include uppercase (A-Z)
           </label>
           <label className="flex items-center gap-3 text-sm text-[var(--text-primary)]">
             <input
@@ -88,7 +88,7 @@ export default function PasswordGenerator() {
               onChange={(e) => setIncludeNumbers(e.target.checked)}
               className="accent-[var(--accent-brass)]"
             />
-            Includi numeri (0-9)
+            Include numbers (0-9)
           </label>
           <label className="flex items-center gap-3 text-sm text-[var(--text-primary)]">
             <input
@@ -97,7 +97,7 @@ export default function PasswordGenerator() {
               onChange={(e) => setIncludeSymbols(e.target.checked)}
               className="accent-[var(--accent-brass)]"
             />
-            Includi simboli (!@#...)
+            Include symbols (!@#...)
           </label>
         </div>
 
@@ -106,13 +106,13 @@ export default function PasswordGenerator() {
             onClick={generatePassword}
             className="flex-1 bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
           >
-            Genera
+            Generate
           </button>
           <button
             onClick={copyToClipboard}
             className="flex-1 border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition"
           >
-            {copied ? "Copiato!" : "Copia"}
+            {copied ? "Copied!" : "Copy"}
           </button>
         </div>
       </div>

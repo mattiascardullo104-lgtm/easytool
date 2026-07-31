@@ -45,7 +45,7 @@ export default function PDFToImages() {
       }
       setPages(out);
     } catch {
-      setError("Impossibile leggere il PDF. Controlla che non sia protetto.");
+      setError("Unable to read the PDF. Make sure it is not protected.");
     } finally {
       setLoading(false);
     }
@@ -54,7 +54,7 @@ export default function PDFToImages() {
   const download = (p: PageImage) => {
     const link = document.createElement("a");
     link.href = p.url;
-    link.download = `pagina-${p.index}.png`;
+    link.download = `page-${p.index}.png`;
     link.click();
   };
 
@@ -62,22 +62,22 @@ export default function PDFToImages() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/pdf" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a PDF
+          ← Back to PDF
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · PDF
+          TOOLS · PDF
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
-          PDF → Immagini
+          PDF to Images
         </h1>
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un PDF"}
+            {file ? file.name : "Choose a PDF"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Ogni pagina diventa un&apos;immagine PNG · tutto nel browser
+            Each page becomes a PNG image · everything stays in your browser
           </span>
           <input
             type="file"
@@ -89,7 +89,7 @@ export default function PDFToImages() {
 
         {loading && (
           <p className="font-tool text-xs text-[var(--text-muted)] text-center mb-6">
-            Conversione in corso...
+            Converting...
           </p>
         )}
 
@@ -98,18 +98,18 @@ export default function PDFToImages() {
         {pages.length > 0 && !loading && (
           <>
             <p className="font-tool text-xs text-[var(--text-muted)] mb-4">
-              {pages.length} {pages.length === 1 ? "pagina" : "pagine"} convertite
+              {pages.length} {pages.length === 1 ? "page" : "pages"} converted
             </p>
             <div className="grid grid-cols-2 gap-4 mb-6">
               {pages.map((p) => (
                 <div key={p.index} className="border border-[var(--border-subtle)] rounded-lg p-3 bg-[var(--bg-surface)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.url} alt={`Pagina ${p.index}`} className="w-full rounded mb-2" />
+                  <img src={p.url} alt={`Page ${p.index}`} className="w-full rounded mb-2" />
                   <button
                     onClick={() => download(p)}
                     className="w-full border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-4 py-2 rounded-md hover:border-[var(--accent-steel)] transition text-sm"
                   >
-                    Scarica pagina {p.index}
+                    Download page {p.index}
                   </button>
                 </div>
               ))}

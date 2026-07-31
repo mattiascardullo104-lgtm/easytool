@@ -1,37 +1,37 @@
 const tools = [
   {
     name: "PDF Merger",
-    desc: "Unisci più PDF in uno solo, direttamente nel browser.",
+    desc: "Merge multiple PDFs into one, directly in your browser.",
     href: "/strumenti/pdf-merger",
   },
   {
     name: "PDF Splitter",
-    desc: "Estrai un intervallo di pagine da un PDF.",
+    desc: "Extract a range of pages from a PDF.",
     href: "/strumenti/pdf-splitter",
   },
   {
     name: "PDF Compressor",
-    desc: "Riduci il peso dei tuoi PDF, direttamente nel browser.",
+    desc: "Reduce the size of your PDFs, directly in your browser.",
     href: "/strumenti/pdf-compressor",
   },
   {
     name: "PDF Editor",
-    desc: "Modifica metadati, aggiungi testo e ruota le pagine.",
+    desc: "Edit metadata, add text and rotate pages.",
     href: "/strumenti/pdf-editor",
   },
   {
-    name: "Immagini → PDF",
-    desc: "Unisci le tue immagini in un unico file PDF.",
+    name: "Images to PDF",
+    desc: "Merge your images into a single PDF file.",
     href: "/strumenti/images-to-pdf",
   },
   {
-    name: "PDF → Immagini",
-    desc: "Converti ogni pagina del PDF in un'immagine PNG.",
+    name: "PDF to Images",
+    desc: "Convert each PDF page into a PNG image.",
     href: "/strumenti/pdf-to-images",
   },
   {
     name: "PDF Rotator",
-    desc: "Ruota tutte le pagine del PDF di 90°, 180° o 270°.",
+    desc: "Rotate all PDF pages by 90°, 180° or 270°.",
     href: "/strumenti/pdf-rotator",
   },
 ];
@@ -41,11 +41,11 @@ export default function PDFHub() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna alla home
+          ← Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          CATEGORIA
+          CATEGORY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-8">
           PDF

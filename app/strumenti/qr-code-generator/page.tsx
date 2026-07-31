@@ -21,11 +21,11 @@ export default function QRCodeGeneratorPage() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/utility" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Utility
+          ← Back to Utility
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · UTILITY
+          TOOLS · UTILITY
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           QR Code Generator
@@ -35,7 +35,7 @@ export default function QRCodeGeneratorPage() {
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Scrivi un link o un testo..."
+          placeholder="Type a link or some text..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-6"
         />
 
@@ -56,7 +56,7 @@ export default function QRCodeGeneratorPage() {
           onClick={downloadQR}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
         >
-          Scarica come immagine
+          Download as image
         </button>
       </div>
     </main>

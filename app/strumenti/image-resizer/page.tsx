@@ -53,11 +53,11 @@ export default function ImageResizer() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = file.name.replace(/\.[^.]+$/, "") + "-ridimensionata.jpg";
+      link.download = file.name.replace(/\.[^.]+$/, "") + "-resized.jpg";
       link.click();
       URL.revokeObjectURL(url);
     } catch {
-      setError("Errore durante il ridimensionamento.");
+      setError("Error during resizing.");
     } finally {
       setLoading(false);
     }
@@ -67,11 +67,11 @@ export default function ImageResizer() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <a href="/strumenti/immagini" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Torna a Immagini
+          ← Back to Images
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          STRUMENTI · IMMAGINI
+          TOOLS · IMAGES
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Image Resizer
@@ -79,10 +79,10 @@ export default function ImageResizer() {
 
         <label className="flex flex-col items-center justify-center border border-dashed border-[var(--border-subtle)] rounded-lg p-10 cursor-pointer hover:border-[var(--accent-brass)] transition mb-6">
           <span className="font-display text-lg font-semibold text-[var(--text-primary)] mb-2">
-            {file ? file.name : "Scegli un'immagine"}
+            {file ? file.name : "Choose an image"}
           </span>
           <span className="font-tool text-xs text-[var(--text-muted)]">
-            Ridimensiona in percentuale o in pixel · tutto nel browser
+            Resize by percentage or pixels · everything in your browser
           </span>
           <input
             type="file"
@@ -98,7 +98,7 @@ export default function ImageResizer() {
             <img
               ref={imageRef}
               src={preview}
-              alt="Anteprima"
+              alt="Preview"
               className="max-h-48 rounded-lg border border-[var(--border-subtle)]"
             />
           </div>
@@ -107,9 +107,9 @@ export default function ImageResizer() {
         <div className="grid grid-cols-3 gap-3 mb-6">
           {(
             [
-              { value: "percent", label: "Percentuale" },
-              { value: "width", label: "Larghezza" },
-              { value: "height", label: "Altezza" },
+              { value: "percent", label: "Percentage" },
+              { value: "width", label: "Width" },
+              { value: "height", label: "Height" },
             ] as { value: Mode; label: string }[]
           ).map((m) => (
             <button
@@ -129,7 +129,7 @@ export default function ImageResizer() {
         {mode === "percent" ? (
           <div className="mb-6">
             <label className="flex items-center justify-between font-tool text-xs text-[var(--text-muted)] mb-2">
-              <span>Scala</span>
+              <span>Scale</span>
               <span className="text-[var(--accent-brass)]">{percent}%</span>
             </label>
             <input
@@ -146,7 +146,7 @@ export default function ImageResizer() {
             {mode === "width" && (
               <div>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Larghezza (px)
+                  Width (px)
                 </label>
                 <input
                   type="number"
@@ -160,7 +160,7 @@ export default function ImageResizer() {
             {mode === "height" && (
               <div>
                 <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                  Altezza (px)
+                  Height (px)
                 </label>
                 <input
                   type="number"
@@ -181,7 +181,7 @@ export default function ImageResizer() {
           disabled={!file || loading}
           className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
         >
-          {loading ? "Ridimensionamento in corso..." : "Ridimensiona e scarica"}
+          {loading ? "Resizing..." : "Resize and download"}
         </button>
       </div>
     </main>
