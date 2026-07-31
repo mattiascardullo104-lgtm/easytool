@@ -27,7 +27,7 @@ const categories = [
     code: "AI",
     name: "AI Arena",
     desc: "Scopri e confronta le migliori intelligenze artificiali.",
-    href: "#",
+    href: "/strumenti/ai",
   },
 ];
 
