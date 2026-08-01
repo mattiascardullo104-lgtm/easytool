@@ -82,6 +82,13 @@ export default function RegisterPage() {
         setLoading(false);
         return;
       }
+      if (!data.session) {
+        setError(
+          "Account created! Check your email to confirm your address, then log in."
+        );
+        setLoading(false);
+        return;
+      }
 
       const { generateKeyPair, encryptPrivateKey } = await import("@/lib/secureCrypto");
       const kp = await generateKeyPair();
