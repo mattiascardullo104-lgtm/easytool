@@ -2,6 +2,8 @@ export const SITE = {
   name: "EasyTools",
   tagline: "Tools online, 100% free.",
   email: "contact@easytools.it",
+  // The domain where the site is hosted (used for sitemap/robots)
+  siteUrl: "https://easytool.vercel.app",
   // PAYPAL DONATIONS (☕)
   // 1. Create a PayPal account at paypal.com and link your Postepay
   // 2. Create your PayPal.Me link at paypal.me and paste it here,

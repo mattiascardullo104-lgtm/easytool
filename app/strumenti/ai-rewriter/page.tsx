@@ -1,0 +1,128 @@
+"use client";
+
+import { useState } from "react";
+
+const TONES = ["Formal", "Friendly", "Professional", "Creative", "Simplified"];
+
+export default function AIRewriter() {
+  const [text, setText] = useState("");
+  const [tone, setTone] = useState(TONES[0]);
+  const [result, setResult] = useState("");
+  const [provider, setProvider] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const rewrite = async () => {
+    if (!text.trim()) {
+      setError("Write some text to rewrite.");
+      return;
+    }
+    setError("");
+    setResult("");
+    setProvider("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: text,
+          system: `Rewrite the following text in a ${tone} tone, keeping the meaning and language of the original. Output only the rewritten text.`,
+        }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setResult(data.text);
+        setProvider(data.provider);
+      }
+    } catch {
+      setError("Something went wrong. Try again in a few seconds.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(result);
+    } catch {}
+  };
+
+  return (
+    <main className="min-h-screen bg-[var(--bg-base)] px-6 py-12">
+      <div className="max-w-2xl mx-auto">
+        <a href="/strumenti/ai" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
+          ← Back to AI Arena
+        </a>
+
+        <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
+          TOOLS · AI
+        </p>
+        <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
+          AI Text Rewriter
+        </h1>
+
+        <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
+          Your text
+        </label>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Paste the text you want to rewrite..."
+          className="w-full h-40 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4 resize-none"
+        />
+
+        <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
+          Tone
+        </label>
+        <select
+          value={tone}
+          onChange={(e) => setTone(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+        >
+          {TONES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+
+        {error && <p className="font-tool text-xs text-red-400 text-center mb-6">{error}</p>}
+
+        <button
+          onClick={rewrite}
+          disabled={loading}
+          className="w-full sm:w-auto bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
+        >
+          {loading ? "Thinking..." : "Rewrite"}
+        </button>
+
+        {result && (
+          <>
+            <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 mb-6 mt-6">
+              <p className="text-sm text-[var(--text-muted)] whitespace-pre-wrap">{result}</p>
+            </div>
+            <button
+              onClick={copy}
+              className="border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium px-6 py-3 rounded-md hover:border-[var(--accent-steel)] transition"
+            >
+              Copy
+            </button>
+          </>
+        )}
+
+        {provider && result && (
+          <p className="font-tool text-[11px] text-[var(--text-muted)] text-center mt-6">
+            Powered by {provider}
+          </p>
+        )}
+
+        <p className="font-tool text-[11px] text-[var(--text-muted)] text-center mt-6">
+          Free AI, no registration needed.
+        </p>
+      </div>
+    </main>
+  );
+}

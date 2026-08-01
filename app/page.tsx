@@ -11,35 +11,35 @@ const categories = [
     code: "Aa",
     name: "Text",
     desc: "Count words, generate lorem ipsum, remove duplicates.",
-    tools: "4 tools",
+    tools: "9 tools",
     href: "/strumenti/testo",
   },
   {
     code: "PDF",
     name: "PDF",
     desc: "Compress, merge, split, rotate and watermark your documents.",
-    tools: "6 tools",
+    tools: "9 tools",
     href: "/strumenti/pdf",
   },
   {
     code: "Img",
     name: "Images",
     desc: "Compress, convert, resize, OCR and extract text.",
-    tools: "6 tools",
+    tools: "7 tools",
     href: "/strumenti/immagini",
   },
   {
     code: "Utl",
     name: "Utility",
     desc: "QR codes, passwords, colors, UUIDs, timer and more.",
-    tools: "9 tools",
+    tools: "14 tools",
     href: "/strumenti/utility",
   },
   {
     code: "AI",
     name: "AI Arena",
     desc: "Generate images and summarize text with artificial intelligence.",
-    tools: "2 tools",
+    tools: "5 tools",
     href: "/strumenti/ai",
   },
 ];
@@ -75,7 +75,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-[var(--text-muted)] text-lg mb-10 max-w-xl mx-auto animate-fade-in-up">
-            25+ essential tools for PDF, images, text and utility.
+            50+ essential tools for PDF, images, text, utility and AI.
             No installs, no registration, no limits.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up">

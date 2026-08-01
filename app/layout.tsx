@@ -2,11 +2,14 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CookieConsent from '@/components/CookieConsent';
+import { SITE } from '@/lib/site';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.siteUrl),
   title: 'EasyTools - Free online tools for PDF, Images, Text and Utility',
   description:
-    'Compress PDFs, convert images, generate QR codes and secure passwords. 25+ free online tools that work directly in your browser, no registration needed.',
+    'Compress PDFs, convert images, generate QR codes and secure passwords. 50+ free online tools that work directly in your browser, no registration needed.',
   keywords: [
     'free online tools',
     'compress pdf free',
@@ -34,6 +37,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

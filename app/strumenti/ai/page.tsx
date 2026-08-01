@@ -4,6 +4,26 @@ const tools = [
     desc: "Describe an image and the AI creates it for you, free.",
     href: "/strumenti/ai-image-generator",
   },
+  {
+    name: "AI Chat Assistant",
+    desc: "Chat with a free AI assistant in any language.",
+    href: "/strumenti/ai-chat",
+  },
+  {
+    name: "AI Text Rewriter",
+    desc: "Rewrite any text in formal, friendly or creative tones.",
+    href: "/strumenti/ai-rewriter",
+  },
+  {
+    name: "AI Translator",
+    desc: "Translate text into 10+ languages, free.",
+    href: "/strumenti/ai-translator",
+  },
+  {
+    name: "AI Email Writer",
+    desc: "Draft professional emails from a topic in seconds.",
+    href: "/strumenti/ai-email",
+  },
 ];
 
 export default function AIHub() {
