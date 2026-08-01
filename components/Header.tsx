@@ -23,7 +23,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 group">
           <span className="relative flex h-8 w-8 items-center justify-center">
-            <span className="absolute inset-0 rounded-lg bg-[var(--accent-brass)]/20 group-hover:bg-[var(--accent-brass)]/30 transition" />
+            <span className="absolute inset-0 rounded-lg bg-[var(--accent-brass)]/20 group-hover:bg-[var(--accent-brass)]/30 group-hover:scale-110 transition-all duration-300" />
             <span className="font-display font-bold text-[var(--accent-brass)]">ET</span>
           </span>
           <span className="font-display text-lg font-semibold text-[var(--text-primary)]">
@@ -41,7 +41,7 @@ export default function Header() {
             <Link
               key={l.href}
               href={l.href}
-              className="font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition"
+              className="nav-link font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition"
             >
               {l.label}
             </Link>
@@ -88,7 +88,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="md:hidden px-6 pb-4 flex flex-col gap-1">
+        <nav className="md:hidden px-6 pb-4 flex flex-col gap-1 animate-fade-in-up">
           {links.map((l) => (
             <Link
               key={l.href}

@@ -63,7 +63,7 @@ export default function LoginPage() {
           Welcome back
         </h1>
 
-        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6">
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 animate-fade-in-up">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
             Email
           </label>
@@ -90,7 +90,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
+            className="btn-shine w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-95 transition disabled:opacity-40"
           >
             {loading ? "Logging in..." : "Log in"}
           </button>

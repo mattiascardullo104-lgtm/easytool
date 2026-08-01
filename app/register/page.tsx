@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export default function RegisterPage() {
       <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
         <div className="max-w-2xl mx-auto">
           <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-            ← Back to home
+            â† Back to home
           </Link>
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-8 text-center">
             <p className="font-display text-xl font-semibold text-[var(--text-primary)] mb-3">
@@ -123,7 +123,7 @@ export default function RegisterPage() {
       <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
         <div className="max-w-2xl mx-auto">
           <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-            ← Back to home
+            â† Back to home
           </Link>
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-8 text-center">
             <p className="font-display text-3xl font-bold text-[var(--text-primary)] mb-3">
@@ -148,17 +148,17 @@ export default function RegisterPage() {
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
       <div className="max-w-2xl mx-auto">
         <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          ← Back to home
+          â† Back to home
         </a>
 
         <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          TOOLS · ACCOUNT
+          TOOLS Â· ACCOUNT
         </p>
         <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
           Create your free account
         </h1>
 
-        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6">
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 animate-fade-in-up">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
             Username
           </label>
@@ -207,7 +207,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
+            className="btn-shine w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
           >
             {loading ? "Creating account..." : "Create account"}
           </button>
