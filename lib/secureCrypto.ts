@@ -5,7 +5,7 @@
 // Messages are sealed with crypto_box (XSalsa20-Poly1305): the server
 // only ever sees ciphertext + nonce.
 
-import _sodium from "libsodium-wrappers";
+import _sodium from "libsodium-wrappers-sumo";
 
 interface SodiumLike {
   ready: Promise<void>;
@@ -19,12 +19,12 @@ interface SodiumLike {
     memLimit: number,
     algorithm: number
   ): Uint8Array;
-  crypto_secretbox_KEYBYTES: number;
-  crypto_secretbox_NONCEBYTES: number;
-  crypto_pwhash_SALTBYTES: number;
-  crypto_pwhash_OPSLIMIT_MODERATE: number;
-  crypto_pwhash_MEMLIMIT_MODERATE: number;
-  crypto_pwhash_ALG_DEFAULT: number;
+  crypto_secretbox_KEYBYTES?: number;
+  crypto_secretbox_NONCEBYTES?: number;
+  crypto_pwhash_SALTBYTES?: number;
+  crypto_pwhash_OPSLIMIT_MODERATE?: number;
+  crypto_pwhash_MEMLIMIT_MODERATE?: number;
+  crypto_pwhash_ALG_DEFAULT?: number;
   crypto_secretbox_easy(
     message: Uint8Array,
     nonce: Uint8Array,
@@ -35,7 +35,7 @@ interface SodiumLike {
     nonce: Uint8Array,
     key: Uint8Array
   ): Uint8Array;
-  crypto_box_NONCEBYTES: number;
+  crypto_box_NONCEBYTES?: number;
   crypto_box_easy(
     message: Uint8Array,
     nonce: Uint8Array,
@@ -56,6 +56,13 @@ interface SodiumLike {
 
 const b64 = (bytes: Uint8Array) => _sodium.to_base64(bytes);
 const fromB64 = (s: string) => _sodium.from_base64(s);
+
+// Some builds of libsodium-wrappers no longer expose the crypto_pwhash
+// constants; fall back to the standard libsodium values.
+const PW_SALT_BYTES = 16;
+const PW_OPS_LIMIT = 3;
+const PW_MEM_LIMIT = 268435456;
+const PW_ALG_DEFAULT = 2;
 
 let sodium: SodiumLike | null = null;
 async function getSodium(): Promise<SodiumLike> {
@@ -85,16 +92,16 @@ export async function encryptPrivateKey(
   password: string
 ): Promise<{ encPrivKey: string; encPrivNonce: string; kdfSalt: string }> {
   const s = await getSodium();
-  const salt = s.randombytes_buf(s.crypto_pwhash_SALTBYTES);
+  const salt = s.randombytes_buf(s.crypto_pwhash_SALTBYTES ?? PW_SALT_BYTES);
   const key = s.crypto_pwhash(
-    s.crypto_secretbox_KEYBYTES,
+    s.crypto_secretbox_KEYBYTES ?? 32,
     password,
     salt,
-    s.crypto_pwhash_OPSLIMIT_MODERATE,
-    s.crypto_pwhash_MEMLIMIT_MODERATE,
-    s.crypto_pwhash_ALG_DEFAULT
+    s.crypto_pwhash_OPSLIMIT_MODERATE ?? PW_OPS_LIMIT,
+    s.crypto_pwhash_MEMLIMIT_MODERATE ?? PW_MEM_LIMIT,
+    s.crypto_pwhash_ALG_DEFAULT ?? PW_ALG_DEFAULT
   );
-  const nonce = s.randombytes_buf(s.crypto_secretbox_NONCEBYTES);
+  const nonce = s.randombytes_buf(s.crypto_secretbox_NONCEBYTES ?? 24);
   const enc = s.crypto_secretbox_easy(s.from_string(privateKey), nonce, key);
   return {
     encPrivKey: b64(enc),
@@ -111,12 +118,12 @@ export async function decryptPrivateKey(
 ): Promise<string> {
   const s = await getSodium();
   const key = s.crypto_pwhash(
-    s.crypto_secretbox_KEYBYTES,
+    s.crypto_secretbox_KEYBYTES ?? 32,
     password,
     fromB64(kdfSalt),
-    s.crypto_pwhash_OPSLIMIT_MODERATE,
-    s.crypto_pwhash_MEMLIMIT_MODERATE,
-    s.crypto_pwhash_ALG_DEFAULT
+    s.crypto_pwhash_OPSLIMIT_MODERATE ?? PW_OPS_LIMIT,
+    s.crypto_pwhash_MEMLIMIT_MODERATE ?? PW_MEM_LIMIT,
+    s.crypto_pwhash_ALG_DEFAULT ?? PW_ALG_DEFAULT
   );
   const dec = s.crypto_secretbox_open_easy(
     fromB64(encPrivKey),
@@ -139,7 +146,7 @@ export async function sealMessage(
   ownPrivateKey: string
 ): Promise<SealedMessage> {
   const s = await getSodium();
-  const nonce = s.randombytes_buf(s.crypto_box_NONCEBYTES);
+  const nonce = s.randombytes_buf(s.crypto_box_NONCEBYTES ?? 24);
   const ciphertext = s.crypto_box_easy(
     s.from_string(message),
     nonce,
