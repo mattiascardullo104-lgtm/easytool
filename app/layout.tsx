@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import { SITE } from '@/lib/site';
+import { SessionProvider } from '@/lib/useSession';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.siteUrl),
@@ -33,11 +34,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-        <CookieConsent />
+      <body className="bg-[var(--bg-base)] text-[var(--text-primary)] antialiased">
+        <SessionProvider>
+          <Header />
+          {children}
+          <Footer />
+          <CookieConsent />
+        </SessionProvider>
       </body>
     </html>
   );

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
 import { usePremium } from "@/lib/usePremium";
+import { useSession } from "@/lib/useSession";
 
 const links = [
   { href: "/strumenti/pdf", label: "PDF" },
@@ -16,6 +16,7 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { premium, ready } = usePremium();
+  const { user, loading } = useSession();
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0E1113]/80 border-b border-[var(--border-subtle)]">
@@ -53,14 +54,22 @@ export default function Header() {
               Premium €1.99
             </Link>
           )}
-          <a
-            href={SITE.paypalDonate}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-3 border border-[var(--border-subtle)] text-[var(--text-muted)] font-medium text-sm px-4 py-2 rounded-md hover:border-[var(--accent-brass)] hover:text-[var(--text-primary)] transition"
-          >
-            ☕
-          </a>
+          {!loading &&
+            (user ? (
+              <Link
+                href="/account"
+                className="ml-3 border border-[var(--border-subtle)] text-[var(--text-muted)] font-medium text-sm px-4 py-2 rounded-md hover:border-[var(--accent-steel)] hover:text-[var(--text-primary)] transition"
+              >
+                Account
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="ml-3 border border-[var(--border-subtle)] text-[var(--text-muted)] font-medium text-sm px-4 py-2 rounded-md hover:border-[var(--accent-steel)] hover:text-[var(--text-primary)] transition"
+              >
+                Login
+              </Link>
+            ))}
         </nav>
 
         <button
@@ -99,14 +108,24 @@ export default function Header() {
               Premium €1.99
             </Link>
           )}
-          <a
-            href={SITE.paypalDonate}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] transition"
-          >
-            ☕ Buy me a coffee
-          </a>
+          {!loading &&
+            (user ? (
+              <Link
+                href="/account"
+                onClick={() => setOpen(false)}
+                className="mt-2 text-center font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] transition"
+              >
+                Account
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="mt-2 text-center font-tool text-xs text-[var(--text-muted)] px-3 py-2 rounded-md hover:text-[var(--text-primary)] transition"
+              >
+                Login
+              </Link>
+            ))}
         </nav>
       )}
     </header>

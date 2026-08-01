@@ -1,5 +1,10 @@
 const tools = [
   {
+    name: "Secure Messages",
+    desc: "End-to-end encrypted chat: find people by email or username.",
+    href: "/strumenti/secure-messages",
+  },
+  {
     name: "Password Generator",
     desc: "Generate strong, random passwords with control over length and symbols.",
     href: "/strumenti/password-generator",

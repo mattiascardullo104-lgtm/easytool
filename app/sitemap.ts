@@ -57,6 +57,10 @@ const paths = [
   { path: "/strumenti/ai-rewriter", priority: 0.8, changeFrequency: "monthly" },
   { path: "/strumenti/ai-translator", priority: 0.8, changeFrequency: "monthly" },
   { path: "/strumenti/ai-email", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/strumenti/secure-messages", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/register", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/login", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/account", priority: 0.6, changeFrequency: "monthly" },
 ] as const;
 
 export default async function sitemap() {

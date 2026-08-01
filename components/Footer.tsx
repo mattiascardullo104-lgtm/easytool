@@ -13,17 +13,9 @@ export default function Footer() {
             {SITE.tagline} All tools run directly in your browser: no file is
             ever uploaded to a server.
           </p>
-          <a
-            href={SITE.paypalDonate}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 border border-[var(--accent-brass)] text-[var(--accent-brass)] font-medium text-sm px-4 py-2 rounded-md hover:bg-[var(--accent-brass)] hover:text-[#15181C] transition"
-          >
-            Support the project ☕
-          </a>
           <Link
             href="/premium"
-            className="inline-block mt-2 bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 transition"
+            className="inline-block mt-4 bg-[var(--accent-brass)] text-[#15181C] font-medium text-sm px-4 py-2 rounded-md hover:opacity-90 transition"
           >
             Premium €1.99/month
           </Link>
