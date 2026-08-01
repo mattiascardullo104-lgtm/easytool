@@ -47,3 +47,29 @@ create policy "messages_select_involved" on public.messages
   for select to authenticated using (auth.uid() = sender_id or auth.uid() = recipient_id);
 create policy "messages_insert_own" on public.messages
   for insert to authenticated with check (auth.uid() = sender_id);
+
+-- --- Extensions: read receipts + username/PIN login ---
+
+-- Read receipts: recipient marks messages as read when opening the chat.
+alter table public.messages add column read_at timestamptz;
+
+create policy "messages_recipient_mark_read" on public.messages
+  for update to authenticated
+  using (recipient_id = auth.uid())
+  with check (recipient_id = auth.uid());
+
+-- Username login: accounts use a derived email (username@easytool.local),
+-- so the client looks up the auth email for a username before signing in.
+-- SECURITY DEFINER: readable by anonymous users (needed before login).
+create or replace function public.get_auth_email_for_username(uname text)
+returns text
+language sql stable security definer set search_path = public
+as $$
+  select email
+  from auth.users
+  where raw_user_meta_data->>'username' = uname
+  limit 1;
+$$;
+
+revoke all on function public.get_auth_email_for_username(text) from public;
+grant execute on function public.get_auth_email_for_username(text) to anon, authenticated;

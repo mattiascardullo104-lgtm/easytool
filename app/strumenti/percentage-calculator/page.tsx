@@ -143,7 +143,8 @@ export default function PercentageCalculator() {
                 : `CHANGE FROM ${b} TO ${a}`}
             </p>
             <p className="font-display text-3xl font-semibold text-[var(--accent-brass)]">
-              {result}%
+              {result}
+              {mode === "percentOf" ? "" : "%"}
             </p>
           </div>
         )}

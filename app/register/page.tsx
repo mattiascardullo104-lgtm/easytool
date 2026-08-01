@@ -1,32 +1,30 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { useSession } from "@/lib/useSession";
 
+const USERNAME_RE = /^[a-zA-Z0-9_]{3,20}$/;
+const PIN_RE = /^\d{6,8}$/;
+
 export default function RegisterPage() {
   const router = useRouter();
-  const { user, reloadProfile } = useSession();
+  const { reloadProfile } = useSession();
+
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pin, setPin] = useState("");
+  const [confirmPin, setConfirmPin] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (user) router.replace("/account");
-  }, [user, router]);
 
   if (!isSupabaseConfigured) {
     return (
       <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-md mx-auto">
           <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-            â† Back to home
+            ← Back to home
           </Link>
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-8 text-center">
             <p className="font-display text-xl font-semibold text-[var(--text-primary)] mb-3">
@@ -41,62 +39,57 @@ export default function RegisterPage() {
     );
   }
 
-  const usernameRegex = /^[A-Za-z0-9_-]{3,20}$/;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    const u = username.trim();
 
-    if (!usernameRegex.test(username)) {
-      setError("Username must be 3-20 characters (letters, numbers, _ -).");
+    if (!USERNAME_RE.test(u)) {
+      setError("Username must be 3-20 characters (letters, numbers, underscore).");
       return;
     }
-    if (!email) {
-      setError("Please enter your email.");
+    if (!PIN_RE.test(pin)) {
+      setError("PIN must be 6-8 digits.");
       return;
     }
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+    if (pin !== confirmPin) {
+      setError("PINs do not match.");
       return;
     }
 
     setLoading(true);
     try {
+      const email = `${u}@easytool.local`;
       const { data, error: signUpError } = await supabase!.auth.signUp({
         email,
-        password,
-        options: { data: { username } },
+        password: pin,
+        options: { data: { username: u } },
       });
       if (signUpError) {
-        setError(signUpError.message);
+        setError(
+          signUpError.code === "user_already_exists" ||
+            signUpError.code === "email_exists" ||
+            /already registered|already been registered/i.test(signUpError.message)
+            ? "Username already taken"
+            : signUpError.message
+        );
         setLoading(false);
         return;
       }
       const userId = data.user?.id;
-      if (!userId) {
+      if (!userId || !data.session) {
         setError("Account created but session could not be started. Please log in.");
-        setLoading(false);
-        return;
-      }
-      if (!data.session) {
-        setError(
-          "Account created! Check your email to confirm your address, then log in."
-        );
         setLoading(false);
         return;
       }
 
       const { generateKeyPair, encryptPrivateKey } = await import("@/lib/secureCrypto");
       const kp = await generateKeyPair();
-      const enc = await encryptPrivateKey(kp.privateKey, password);
+      const enc = await encryptPrivateKey(kp.privateKey, pin);
 
       const { error: insertError } = await supabase!.from("profiles").insert({
         id: userId,
-        username,
+        username: u,
         email,
         display_name: null,
         pub_key: kp.publicKey,
@@ -108,7 +101,6 @@ export default function RegisterPage() {
         if (insertError.code === "23505") {
           setError("Username already taken");
           await supabase!.auth.signOut();
-          router.replace("/register");
         } else {
           setError(insertError.message);
         }
@@ -117,112 +109,97 @@ export default function RegisterPage() {
       }
 
       await reloadProfile();
-      setSuccess(true);
+      router.replace("/strumenti/secure-messages");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
-    } finally {
       setLoading(false);
     }
   };
 
-  if (success) {
-    return (
-      <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
-        <div className="max-w-2xl mx-auto">
-          <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-            â† Back to home
-          </Link>
-          <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-8 text-center">
-            <p className="font-display text-3xl font-bold text-[var(--text-primary)] mb-3">
-              Account created!
-            </p>
-            <p className="text-sm text-[var(--text-muted)] mb-6">
-              Your encryption keys are ready. You can now send and receive secure messages.
-            </p>
-            <Link
-              href="/strumenti/secure-messages"
-              className="inline-block bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition"
-            >
-              Open Secure Messages
-            </Link>
-          </div>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
-      <div className="max-w-2xl mx-auto">
-        <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
-          â† Back to home
-        </a>
+      <div className="max-w-md mx-auto">
+        <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
+          ← Back to home
+        </Link>
 
-        <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          TOOLS Â· ACCOUNT
-        </p>
-        <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
-          Create your free account
-        </h1>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-11 h-11 rounded-full bg-[#2E6B4E] flex items-center justify-center text-lg">
+            🔒
+          </div>
+          <div>
+            <h1 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
+              Create your account
+            </h1>
+            <p className="text-xs text-[var(--text-muted)]">
+              Username + PIN. That&apos;s it. No email, no spam.
+            </p>
+          </div>
+        </div>
 
-        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 animate-fade-in-up">
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-6 animate-fade-in-up">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Username
+            USERNAME
           </label>
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="3-20 characters, letters, numbers, _ -"
-            autoComplete="username"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setError("");
+            }}
+            placeholder="e.g. matti"
+            autoComplete="off"
+            autoFocus
+            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
           />
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            autoComplete="email"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
-          />
-          <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Password
+            PIN · 6-8 DIGITS
           </label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="At least 8 characters"
+            value={pin}
+            onChange={(e) => {
+              setPin(e.target.value);
+              setError("");
+            }}
+            placeholder="••••••"
             autoComplete="new-password"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+            inputMode="numeric"
+            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
           />
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Confirm password
+            CONFIRM PIN
           </label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Repeat your password"
+            value={confirmPin}
+            onChange={(e) => {
+              setConfirmPin(e.target.value);
+              setError("");
+            }}
+            placeholder="••••••"
             autoComplete="new-password"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+            inputMode="numeric"
+            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
           />
           {error && <p className="font-tool text-xs text-red-400 text-center mb-4">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="btn-shine w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-40"
+            className="btn-shine w-full bg-[#2E6B4E] text-white font-medium px-6 py-3 rounded-lg hover:opacity-95 transition disabled:opacity-40"
           >
-            {loading ? "Creating account..." : "Create account"}
+            {loading ? "Creating..." : "Create account"}
           </button>
           <p className="font-tool text-xs text-[var(--text-muted)] text-center mt-4">
             Already have an account?{" "}
             <Link href="/login" className="text-[var(--accent-steel)] hover:underline">
               Log in
             </Link>
+          </p>
+          <p className="font-tool text-[10px] text-[var(--text-muted)]/70 text-center mt-3 leading-relaxed">
+            Your PIN encrypts your private key. It never leaves your browser
+            and cannot be recovered — don&apos;t forget it.
           </p>
         </form>
       </div>

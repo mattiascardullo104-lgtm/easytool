@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function AccountPage() {
     reloadProfile,
   } = useSession();
 
-  const [password, setPassword] = useState("");
+  const [pin, setPin] = useState("");
   const [confirm, setConfirm] = useState("");
   const [unlockError, setUnlockError] = useState("");
   const [unlockLoading, setUnlockLoading] = useState(false);
@@ -93,13 +93,13 @@ export default function AccountPage() {
     e.preventDefault();
     setUnlockError("");
     setUnlockLoading(true);
-    const ok = await unlock(password);
+    const ok = await unlock(pin);
     setUnlockLoading(false);
     if (!ok) {
-      setUnlockError("Wrong password");
+      setUnlockError("Wrong PIN");
       return;
     }
-    setPassword("");
+    setPin("");
     setUnlocked(true);
   };
 
@@ -107,19 +107,20 @@ export default function AccountPage() {
     e.preventDefault();
     setSetupError("");
     if (!user) return;
-    if (password.length < 8) {
-      setSetupError("Password must be at least 8 characters.");
+    const p = pin;
+    if (p.length < 8) {
+      setSetupError("PIN must be at least 8 characters.");
       return;
     }
-    if (password !== confirm) {
-      setSetupError("Passwords do not match.");
+    if (p !== confirm) {
+      setSetupError("PINs do not match.");
       return;
     }
     setSetupLoading(true);
     try {
       const { generateKeyPair, encryptPrivateKey } = await import("@/lib/secureCrypto");
       const kp = await generateKeyPair();
-      const enc = await encryptPrivateKey(kp.privateKey, password);
+      const enc = await encryptPrivateKey(kp.privateKey, p);
       const { error } = await supabase!.from("profiles").insert({
         id: user.id,
         username: user.email?.split("@")[0] ?? "user",
@@ -130,11 +131,11 @@ export default function AccountPage() {
         kdf_salt: enc.kdfSalt,
       });
       if (error) throw error;
-      setPassword("");
+      setPin("");
       setConfirm("");
       await reloadProfile();
-      const ok = await unlock(password);
-      if (!ok) setUnlockError("Wrong password");
+      const ok = await unlock(p);
+      if (!ok) setUnlockError("Wrong PIN");
       setUnlocked(true);
     } catch (err) {
       setSetupError(err instanceof Error ? err.message : "Setup failed. Try again.");
@@ -192,25 +193,26 @@ export default function AccountPage() {
               </p>
               <p className="text-sm text-[var(--text-muted)] mb-4">
                 Your account was created before your encryption keys could be
-                generated. Choose a password to secure them: this is the
-                password you will use to unlock your secure messages.
+                generated. Choose a PIN (6-8 digits) to secure them: this is
+                the PIN you will use to unlock your secure messages.
               </p>
               <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                Password
+                PIN
               </label>
               <input
                 type="password"
-                value={password}
+                value={pin}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setPin(e.target.value);
                   setSetupError("");
                 }}
-                placeholder="At least 8 characters"
-                autoComplete="new-password"
+                placeholder="6-8 digits"
+                autoComplete="off"
+                inputMode="numeric"
                 className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
               />
               <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                Confirm password
+                Confirm PIN
               </label>
               <input
                 type="password"
@@ -219,8 +221,9 @@ export default function AccountPage() {
                   setConfirm(e.target.value);
                   setSetupError("");
                 }}
-                placeholder="Repeat the password"
-                autoComplete="new-password"
+                placeholder="Repeat the PIN"
+                autoComplete="off"
+                inputMode="numeric"
                 className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
               />
               {setupError && (
@@ -245,14 +248,15 @@ export default function AccountPage() {
                 Unlock your messages
               </p>
               <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-                Your password
+                Your PIN
               </label>
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
                 placeholder="••••••••"
-                autoComplete="current-password"
+                autoComplete="off"
+                inputMode="numeric"
                 className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
               />
               {unlockError && (
@@ -266,7 +270,7 @@ export default function AccountPage() {
                 {unlockLoading ? "Unlocking..." : "Unlock"}
               </button>
               <p className="font-tool text-xs text-[var(--text-muted)] mt-4">
-                Your private key is encrypted with your password and stored
+                Your private key is encrypted with your PIN and stored
                 securely. Entering it here unlocks message decryption in this
                 browser.
               </p>

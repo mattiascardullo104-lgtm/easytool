@@ -9,9 +9,14 @@ export default function RandomGenerator() {
   const [coin, setCoin] = useState("");
   const [dice, setDice] = useState(0);
   const [history, setHistory] = useState<number[]>([]);
+  const [error, setError] = useState("");
 
   const generateNumber = () => {
-    if (max <= min) return;
+    if (max <= min) {
+      setError("Maximum must be greater than minimum.");
+      return;
+    }
+    setError("");
     const n = Math.floor(Math.random() * (max - min + 1)) + min;
     setNumber(n);
     setHistory((prev) => [n, ...prev].slice(0, 5));
@@ -69,6 +74,7 @@ export default function RandomGenerator() {
           >
             Generate
           </button>
+          {error && <p className="font-tool text-xs text-red-400 text-center mb-4">{error}</p>}
           <div className="text-center">
             <span className="font-display text-4xl font-semibold text-[var(--text-primary)]">
               {number ?? "—"}

@@ -41,7 +41,11 @@ export default function ImageFilters() {
       const ctx = canvas.getContext("2d")!;
       ctx.filter = "none";
       ctx.drawImage(img, 0, 0);
-      ctx.filter = `${filter}(${intensity}%)`;
+      const cssFilter =
+        filter === "blur"
+          ? `blur(${Math.round((intensity / 100) * 20)}px)`
+          : `${filter}(${intensity}%)`;
+      ctx.filter = cssFilter;
       ctx.drawImage(img, 0, 0);
       const blob = await new Promise<Blob | null>((resolve) =>
         canvas.toBlob(resolve, "image/png")

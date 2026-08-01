@@ -25,6 +25,7 @@ export default function HashGenerator() {
   const [hashes, setHashes] = useState<Record<string, string>>({});
 
   const generate = async (text: string) => {
+    setInput(text);
     if (!text) {
       setHashes({});
       return;

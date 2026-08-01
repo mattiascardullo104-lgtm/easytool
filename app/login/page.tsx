@@ -7,15 +7,15 @@ import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [identifier, setIdentifier] = useState("");
+  const [pin, setPin] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   if (!isSupabaseConfigured) {
     return (
       <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-md mx-auto">
           <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
             ← Back to home
           </Link>
@@ -37,60 +37,101 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
 
-    const { error: signInError } = await supabase!.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (signInError) {
-      setError("Invalid email or password");
+    const raw = identifier.trim();
+    if (!raw || !pin) {
+      setError("Enter your username and PIN.");
       setLoading(false);
       return;
     }
-    router.push("/strumenti/secure-messages");
+
+    try {
+      let email = raw;
+      if (!raw.includes("@")) {
+        const { data: lookup, error: lookupError } = await supabase!.rpc(
+          "get_auth_email_for_username",
+          { uname: raw }
+        );
+        if (lookupError || !lookup) {
+          setError("User not found.");
+          setLoading(false);
+          return;
+        }
+        email = lookup;
+      }
+
+      const { error: signInError } = await supabase!.auth.signInWithPassword({
+        email,
+        password: pin,
+      });
+      if (signInError) {
+        setError("Invalid username or PIN");
+        setLoading(false);
+        return;
+      }
+      router.push("/strumenti/secure-messages");
+    } catch {
+      setError("Login failed. Try again.");
+      setLoading(false);
+    }
   };
 
   return (
     <main className="min-h-screen bg-[var(--bg-base)] px-6 py-16">
-      <div className="max-w-2xl mx-auto">
-        <a href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
+      <div className="max-w-md mx-auto">
+        <Link href="/" className="font-tool text-xs text-[var(--accent-steel)] mb-6 inline-block">
           ← Back to home
-        </a>
+        </Link>
 
-        <p className="font-tool text-xs tracking-widest text-[var(--accent-brass)] mb-2">
-          TOOLS · ACCOUNT
-        </p>
-        <h1 className="font-display text-3xl font-semibold text-[var(--text-primary)] mb-6">
-          Welcome back
-        </h1>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-11 h-11 rounded-full bg-[#2E6B4E] flex items-center justify-center text-lg">
+            🔒
+          </div>
+          <div>
+            <h1 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
+              Welcome back
+            </h1>
+            <p className="text-xs text-[var(--text-muted)]">
+              Log in with your username and PIN.
+            </p>
+          </div>
+        </div>
 
-        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 animate-fade-in-up">
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-6 animate-fade-in-up">
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Email
+            USERNAME
           </label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            autoComplete="email"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+            type="text"
+            value={identifier}
+            onChange={(e) => {
+              setIdentifier(e.target.value);
+              setError("");
+            }}
+            placeholder="e.g. matti"
+            autoComplete="username"
+            autoFocus
+            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
           />
           <label className="font-tool text-xs text-[var(--text-muted)] block mb-2">
-            Password
+            PIN
           </label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Your password"
+            value={pin}
+            onChange={(e) => {
+              setPin(e.target.value);
+              setError("");
+            }}
+            placeholder="••••••"
             autoComplete="current-password"
-            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
+            inputMode="numeric"
+            className="w-full bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--accent-brass)] transition mb-4"
           />
           {error && <p className="font-tool text-xs text-red-400 text-center mb-4">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="btn-shine w-full bg-[var(--accent-brass)] text-[#15181C] font-medium px-6 py-3 rounded-md hover:opacity-95 transition disabled:opacity-40"
+            className="btn-shine w-full bg-[#2E6B4E] text-white font-medium px-6 py-3 rounded-lg hover:opacity-95 transition disabled:opacity-40"
           >
             {loading ? "Logging in..." : "Log in"}
           </button>

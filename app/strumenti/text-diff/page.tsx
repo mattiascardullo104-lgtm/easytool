@@ -62,7 +62,9 @@ const diffLines = (a: string[], b: string[]): DiffEntry[] => {
 };
 
 const countType = (entries: DiffEntry[], type: "added" | "removed") =>
-  entries.filter((e) => e.type === type).length;
+  entries
+    .filter((e) => e.type === type)
+    .reduce((sum, e) => sum + e.text.split("\n").length, 0);
 
 export default function TextDiff() {
   const [original, setOriginal] = useState("");

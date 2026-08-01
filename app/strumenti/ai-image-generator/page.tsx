@@ -32,13 +32,20 @@ export default function AIImageGenerator() {
     img.src = url;
   };
 
-  const download = () => {
+  const download = async () => {
     if (!imageUrl) return;
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    link.download = "ai-image.png";
-    link.target = "_blank";
-    link.click();
+    try {
+      const res = await fetch(imageUrl);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "ai-image.png";
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open(imageUrl, "_blank");
+    }
   };
 
   return (
